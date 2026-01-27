@@ -6843,25 +6843,47 @@
     </main>
 
     <script>
-        // Navigation
+        // Navigation helper function
+        function showSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section || !section.classList.contains('section')) return false;
+
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+            if (navLink) navLink.classList.add('active');
+
+            // Show section
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            section.classList.add('active');
+
+            return true;
+        }
+
+        // Navigation links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
-                
-                // Update active nav
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Show section
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                document.getElementById(sectionId).classList.add('active');
-                
+                showSection(sectionId);
+
                 // Close mobile nav
                 document.getElementById('nav').classList.remove('open');
-                
+
                 // Scroll to top
                 window.scrollTo(0, 0);
             });
+        });
+
+        // Internal anchor links (e.g., href="#trustworthy")
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link || link.classList.contains('nav-link')) return;
+
+            const sectionId = link.getAttribute('href').slice(1);
+            if (showSection(sectionId)) {
+                e.preventDefault();
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            }
         });
 
         // Expand cards
