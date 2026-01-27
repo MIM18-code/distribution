@@ -530,6 +530,40 @@
             line-height: 1.65;
         }
 
+        /* Section Navigation Tabs */
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-nav-btn {
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .section-nav-btn:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: var(--surface-hover);
+        }
+
+        .section-nav-btn.active {
+            color: var(--text);
+            background: var(--accent-muted);
+            border-color: var(--accent);
+        }
+
         /* Tier Labels */
         .tier-section { margin-bottom: 48px; }
 
@@ -1659,6 +1693,14 @@
                 <p>Companies with verified positive track records, transparent accounting, and filmmaker-friendly terms.</p>
             </div>
 
+            <div class="section-nav">
+                <button class="section-nav-btn active" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
+            </div>
+
             <div class="tier-section">
                 <div class="tier-label"><span class="tier-dot trust"></span>Verified Trustworthy</div>
 
@@ -1758,6 +1800,14 @@
             <div class="section-header">
                 <h2>Boutique & Curatorial Distributors</h2>
                 <p>The "Curatorial Class" represents the gold standard for independent horror. These companies build brand identity around titles, using theatrical windows and physical media to create perceived value.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn active" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="tier-section">
@@ -1871,6 +1921,14 @@
             <div class="section-header">
                 <h2>Proceed with Caution</h2>
                 <p>Legitimate businesses with mixed reputations. May work for some filmmakers but require careful contract review and realistic expectations.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn active" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box warning">
@@ -2378,6 +2436,14 @@
             <div class="section-header">
                 <h2>Avoid These Distributors</h2>
                 <p>Companies with documented patterns of non-payment, predatory contracts, or practices that consistently harm filmmakers.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn active" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box danger">
@@ -2903,6 +2969,14 @@
             <div class="section-header">
                 <h2>Prestige Tier</h2>
                 <p>The pinnacle of indie distribution. Access typically requires major festival premieres (Sundance, Cannes, TIFF) or established sales agent representation. Generally don't accept unsolicited submissions.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn active" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box">
@@ -6861,6 +6935,10 @@
             const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
             if (navLink) navLink.classList.add('active');
 
+            // Update section nav buttons (distributor tabs)
+            document.querySelectorAll('.section-nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll(`.section-nav-btn[data-section="${sectionId}"]`).forEach(btn => btn.classList.add('active'));
+
             // Clear inline styles and show only target section
             document.querySelectorAll('.section').forEach(s => {
                 s.classList.remove('active');
@@ -6895,6 +6973,15 @@
                 e.preventDefault();
                 document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
             }
+        });
+
+        // Section navigation buttons (distributor category tabs)
+        document.querySelectorAll('.section-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
+                window.scrollTo(0, 0);
+            });
         });
 
         // Expand cards
