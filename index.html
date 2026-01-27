@@ -6848,13 +6848,24 @@
             const section = document.getElementById(sectionId);
             if (!section || !section.classList.contains('section')) return false;
 
+            // Clear search state
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('hidden');
+                card.style.borderColor = '';
+            });
+
             // Update active nav link
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
             if (navLink) navLink.classList.add('active');
 
-            // Show section
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Clear inline styles and show only target section
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = '';
+            });
             section.classList.add('active');
 
             return true;
