@@ -6872,7 +6872,18 @@
         // Search
         function handleSearch(event) {
             const query = event.target.value.toLowerCase();
-            if (query.length < 2) return;
+
+            // Reset view if query is too short
+            if (query.length < 2) {
+                document.querySelectorAll('.card').forEach(card => {
+                    card.classList.remove('hidden');
+                    card.style.borderColor = '';
+                });
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = '';
+                });
+                return;
+            }
 
             // Search through all cards
             const cards = document.querySelectorAll('.card');
@@ -6886,12 +6897,14 @@
                 }
             });
 
-            // Show all sections that have matching content
+            // Show sections with matches, hide those without
             document.querySelectorAll('.section').forEach(section => {
                 const hasVisibleCards = section.querySelectorAll('.card:not(.hidden)').length > 0;
                 const hasTextMatch = section.textContent.toLowerCase().includes(query);
                 if (hasVisibleCards || hasTextMatch) {
                     section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
                 }
             });
         }
