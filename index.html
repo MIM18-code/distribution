@@ -11,6 +11,7 @@
             --bg-warm: #110e0c;
             --surface: #161311;
             --surface-elevated: #1c1917;
+            --surface-hover: #1f1b18;
             --border: #292524;
             --border-hover: #44403c;
             --text: #fafaf9;
@@ -81,6 +82,7 @@
             --bg-warm: #fafaf9;
             --surface: #ffffff;
             --surface-elevated: #fafaf9;
+            --surface-hover: #f5f5f4;
             --border: #e7e5e4;
             --border-hover: #d6d3d1;
             --text: #1c1917;
@@ -91,6 +93,27 @@
 
         body.light-mode::after {
             background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0,0,0,0.08) 100%);
+        }
+
+        /* Skip Link (Accessibility) */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 16px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+            outline: 2px solid var(--text);
+            outline-offset: 2px;
         }
 
         /* Nav */
@@ -330,13 +353,21 @@
             transition: opacity 0.25s ease;
         }
 
-        .card:hover {
+        .card:hover,
+        .card:focus {
             border-color: var(--border-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            outline: none;
         }
 
-        .card:hover::before {
+        .card:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .card:hover::before,
+        .card:focus::before {
             opacity: 1;
         }
 
@@ -819,6 +850,12 @@
             .theme-toggle { right: 72px; }
         }
 
+        @media (max-width: 500px) {
+            .stats-row { grid-template-columns: 1fr; }
+            .section-nav { gap: 6px; }
+            .section-nav-btn { padding: 8px 12px; font-size: 0.8rem; }
+        }
+
         .mobile-header { display: none; }
         @media (max-width: 900px) { .mobile-header { display: flex; } }
 
@@ -926,6 +963,7 @@
         }
 
         .hidden { display: none !important; }
+        .search-highlight { border-color: var(--accent) !important; }
 
         .site-footer {
             margin-top: 72px;
@@ -6926,8 +6964,7 @@
             const searchInput = document.getElementById('searchInput');
             if (searchInput) searchInput.value = '';
             document.querySelectorAll('.card').forEach(card => {
-                card.classList.remove('hidden');
-                card.style.borderColor = '';
+                card.classList.remove('hidden', 'search-highlight');
             });
 
             // Update active nav link
@@ -6986,8 +7023,22 @@
 
         // Expand cards
         function toggleExpand(card) {
-            card.classList.toggle('expanded');
+            const isExpanded = card.classList.toggle('expanded');
+            card.setAttribute('aria-expanded', isExpanded);
         }
+
+        // Initialize expandable cards for accessibility
+        document.querySelectorAll('.card.expandable').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-expanded', 'false');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleExpand(this);
+                }
+            });
+        });
 
         // Search
         function handleSearch(event) {
@@ -6996,8 +7047,7 @@
             // Reset view if query is too short
             if (query.length < 2) {
                 document.querySelectorAll('.card').forEach(card => {
-                    card.classList.remove('hidden');
-                    card.style.borderColor = '';
+                    card.classList.remove('hidden', 'search-highlight');
                 });
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = '';
@@ -7011,9 +7061,10 @@
                 const text = card.textContent.toLowerCase();
                 if (text.includes(query)) {
                     card.classList.remove('hidden');
-                    card.style.borderColor = 'var(--accent)';
+                    card.classList.add('search-highlight');
                 } else {
                     card.classList.add('hidden');
+                    card.classList.remove('search-highlight');
                 }
             });
 
@@ -7033,8 +7084,7 @@
         document.getElementById('searchInput').addEventListener('input', function() {
             if (this.value === '') {
                 document.querySelectorAll('.card').forEach(card => {
-                    card.classList.remove('hidden');
-                    card.style.borderColor = '';
+                    card.classList.remove('hidden', 'search-highlight');
                 });
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = '';
@@ -7092,6 +7142,7 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 900) {
+                    nav.classList.remove('open');
                     navOverlay.classList.remove('visible');
                     document.body.style.overflow = '';
                 }
