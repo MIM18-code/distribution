@@ -372,7 +372,9 @@
         }
 
         .card.defunct {
-            opacity: 0.5;
+            opacity: 1;
+            filter: grayscale(100%);
+            border: 1px dashed var(--danger);
         }
 
         .card.defunct::after {
@@ -491,6 +493,21 @@
 
         .expandable.expanded .expand-trigger::after {
             transform: rotate(45deg);
+        }
+
+        /* Table Wrapper (mobile overflow) */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 28px 0;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .table-wrapper .comparison-table,
+        .table-wrapper .deliverables-table {
+            border: none;
+            margin: 0;
         }
 
         /* Tables */
@@ -727,6 +744,7 @@
         .tier-dot.caution { background: var(--caution); box-shadow: 0 0 8px var(--caution); }
         .tier-dot.avoid { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
         .tier-dot.purple { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+        .tier-dot.info { background: var(--info); box-shadow: 0 0 8px var(--info); }
 
         /* Prose */
         .prose { max-width: 660px; }
@@ -909,6 +927,13 @@
 
         /* Mobile */
         @media (max-width: 900px) {
+            .comparison-table,
+            .deliverables-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .nav-container {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
@@ -8361,13 +8386,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Amazon Prime Video Direct</h3>
-                        <span class="card-badge badge-trust">Direct Access</span>
+                        <span class="card-badge badge-caution">Restricted Access</span>
                     </div>
                     <div class="card-content">
                         <p><strong>Revenue:</strong> 50% of rental/purchase, ~$0.06-0.15/hour streamed (if included in Prime)</p>
-                        <p><strong>Cost:</strong> Free to upload</p>
-                        <p><strong>Control:</strong> You set pricing, you see real-time analytics</p>
-                        <p><strong>Reality:</strong> This is where most "distributed" indie horror ends up anyway. Why give a distributor 30-50% to put you here?</p>
+                        <p><strong>Cost:</strong> Free to upload (if you have access)</p>
+                        <p><strong>Status:</strong> New account creation effectively closed as of late 2024. Now invite-only or via aggregator (Filmhub). Existing accounts grandfathered in.</p>
+                        <p><strong>Reality:</strong> If you already have a PVD account, use it. If not, access Amazon through Filmhub or another aggregator.</p>
                     </div>
                 </div>
 
@@ -8412,7 +8437,7 @@
             <div class="critical-alert" style="margin-top: 24px;">
                 <h4>💡 The Math That Should Change Your Mind</h4>
                 <p><strong>Scenario A (Bad Distributor):</strong> Sign with distributor offering No MG, 10-year exclusive, $25K expense cap. Your film generates $30K gross over 3 years. After their 40% fee ($12K) and "expenses" ($25K), you receive: <strong style="color: var(--danger);">$0</strong>. Rights locked until 2036.</p>
-                <p style="margin-top: 12px;"><strong>Scenario B (Self-Distribution):</strong> Upload to Amazon Direct yourself. Same film generates $20K gross over 3 years (less reach, but still). Amazon takes 50% ($10K), you receive: <strong style="color: var(--trust);">$10K</strong>. Rights remain yours. You can license to other platforms, sell physical, or sign a REAL deal later.</p>
+                <p style="margin-top: 12px;"><strong>Scenario B (Self-Distribution):</strong> Put your film on Tubi/YouTube via Filmhub (80/20 split) and sell physical via Kunaki. Same film generates $20K gross over 3 years (less reach, but still). After Filmhub's 20% ($4K), you receive: <strong style="color: var(--trust);">$16K</strong>. Rights remain yours. You can license to other platforms, sell physical, or sign a REAL deal later.</p>
                 <p style="margin-top: 12px;"><strong>The lesson:</strong> A "worse" distribution path that you control beats a "better" path controlled by someone who doesn't pay you.</p>
             </div>
 
@@ -8875,6 +8900,7 @@
             link.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
                 showSection(sectionId);
+                window.location.hash = sectionId;
 
                 // Close mobile nav
                 document.getElementById('nav').classList.remove('open');
@@ -8883,6 +8909,18 @@
                 window.scrollTo(0, 0);
             });
         });
+
+        // Handle back/forward browser buttons
+        window.addEventListener('hashchange', function() {
+            const sectionId = window.location.hash.slice(1) || 'overview';
+            showSection(sectionId);
+        });
+
+        // Load correct section from URL hash on page load
+        (function() {
+            const hash = window.location.hash.slice(1);
+            if (hash) showSection(hash);
+        })();
 
         // Internal anchor links (e.g., href="#trustworthy")
         document.addEventListener('click', function(e) {
@@ -8901,6 +8939,7 @@
             btn.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
                 showSection(sectionId);
+                window.location.hash = sectionId;
                 window.scrollTo(0, 0);
             });
         });
@@ -8946,6 +8985,10 @@
                 if (text.includes(query)) {
                     card.classList.remove('hidden');
                     card.classList.add('search-highlight');
+                    if (query.length > 3 && card.classList.contains('expandable')) {
+                        card.classList.add('expanded');
+                        card.setAttribute('aria-expanded', 'true');
+                    }
                 } else {
                     card.classList.add('hidden');
                     card.classList.remove('search-highlight');
