@@ -11,6 +11,7 @@
             --bg-warm: #110e0c;
             --surface: #161311;
             --surface-elevated: #1c1917;
+            --surface-hover: #1f1b18;
             --border: #292524;
             --border-hover: #44403c;
             --text: #fafaf9;
@@ -81,6 +82,7 @@
             --bg-warm: #fafaf9;
             --surface: #ffffff;
             --surface-elevated: #fafaf9;
+            --surface-hover: #f5f5f4;
             --border: #e7e5e4;
             --border-hover: #d6d3d1;
             --text: #1c1917;
@@ -91,6 +93,27 @@
 
         body.light-mode::after {
             background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0,0,0,0.08) 100%);
+        }
+
+        /* Skip Link (Accessibility) */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 16px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+            outline: 2px solid var(--text);
+            outline-offset: 2px;
         }
 
         /* Nav */
@@ -330,13 +353,21 @@
             transition: opacity 0.25s ease;
         }
 
-        .card:hover {
+        .card:hover,
+        .card:focus {
             border-color: var(--border-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            outline: none;
         }
 
-        .card:hover::before {
+        .card:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .card:hover::before,
+        .card:focus::before {
             opacity: 1;
         }
 
@@ -555,7 +586,7 @@
             line-height: 1.65;
         }
 
-        .info-box ul {
+.info-box ul {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.65;
@@ -635,6 +666,40 @@
 
         .critical-alert .action-link:hover {
             background: rgba(255,255,255,0.9);
+        }
+
+        /* Section Navigation Tabs */
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-nav-btn {
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .section-nav-btn:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: var(--surface-hover);
+        }
+
+        .section-nav-btn.active {
+            color: var(--text);
+            background: var(--accent-muted);
+            border-color: var(--accent);
         }
 
         /* Tier Labels */
@@ -892,6 +957,12 @@
             .theme-toggle { right: 72px; }
         }
 
+        @media (max-width: 500px) {
+            .stats-row { grid-template-columns: 1fr; }
+            .section-nav { gap: 6px; }
+            .section-nav-btn { padding: 8px 12px; font-size: 0.8rem; }
+        }
+
         .mobile-header { display: none; }
         @media (max-width: 900px) { .mobile-header { display: flex; } }
 
@@ -999,6 +1070,7 @@
         }
 
         .hidden { display: none !important; }
+        .search-highlight { border-color: var(--accent) !important; }
 
         .site-footer {
             margin-top: 72px;
@@ -1801,6 +1873,14 @@
                 <p>Companies with verified positive track records, transparent accounting, and filmmaker-friendly terms.</p>
             </div>
 
+            <div class="section-nav">
+                <button class="section-nav-btn active" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
+            </div>
+
             <div class="tier-section">
                 <div class="tier-label"><span class="tier-dot trust"></span>Verified Trustworthy</div>
 
@@ -1900,6 +1980,14 @@
             <div class="section-header">
                 <h2>Boutique & Curatorial Distributors</h2>
                 <p>The "Curatorial Class" represents the gold standard for independent horror. These companies build brand identity around titles, using theatrical windows and physical media to create perceived value.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn active" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="tier-section">
@@ -2013,6 +2101,14 @@
             <div class="section-header">
                 <h2>Proceed with Caution</h2>
                 <p>Legitimate businesses with mixed reputations. May work for some filmmakers but require careful contract review and realistic expectations.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn active" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box warning">
@@ -2520,6 +2616,14 @@
             <div class="section-header">
                 <h2>Avoid These Distributors</h2>
                 <p>Companies with documented patterns of non-payment, predatory contracts, or practices that consistently harm filmmakers.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn active" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box danger">
@@ -3052,6 +3156,14 @@
             <div class="section-header">
                 <h2>Prestige Tier</h2>
                 <p>The pinnacle of indie distribution. Access typically requires major festival premieres (Sundance, Cannes, TIFF) or established sales agent representation. Generally don't accept unsolicited submissions.</p>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn" data-section="trustworthy">Trustworthy</button>
+                <button class="section-nav-btn" data-section="boutique">Boutique</button>
+                <button class="section-nav-btn" data-section="caution">Proceed w/ Caution</button>
+                <button class="section-nav-btn" data-section="avoid">Avoid</button>
+                <button class="section-nav-btn active" data-section="prestige">Prestige</button>
             </div>
 
             <div class="info-box">
@@ -7081,36 +7193,105 @@
     </main>
 
     <script>
-        // Navigation
+        // Navigation helper function
+        function showSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section || !section.classList.contains('section')) return false;
+
+            // Clear search state
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('hidden', 'search-highlight');
+            });
+
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+            if (navLink) navLink.classList.add('active');
+
+            // Update section nav buttons (distributor tabs)
+            document.querySelectorAll('.section-nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll(`.section-nav-btn[data-section="${sectionId}"]`).forEach(btn => btn.classList.add('active'));
+
+            // Clear inline styles and show only target section
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = '';
+            });
+            section.classList.add('active');
+
+            return true;
+        }
+
+        // Navigation links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
-                
-                // Update active nav
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Show section
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                document.getElementById(sectionId).classList.add('active');
-                
+                showSection(sectionId);
+
                 // Close mobile nav
                 document.getElementById('nav').classList.remove('open');
-                
+
                 // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Internal anchor links (e.g., href="#trustworthy")
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link || link.classList.contains('nav-link')) return;
+
+            const sectionId = link.getAttribute('href').slice(1);
+            if (showSection(sectionId)) {
+                e.preventDefault();
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Section navigation buttons (distributor category tabs)
+        document.querySelectorAll('.section-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
                 window.scrollTo(0, 0);
             });
         });
 
         // Expand cards
         function toggleExpand(card) {
-            card.classList.toggle('expanded');
+            const isExpanded = card.classList.toggle('expanded');
+            card.setAttribute('aria-expanded', isExpanded);
         }
+
+        // Initialize expandable cards for accessibility
+        document.querySelectorAll('.card.expandable').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-expanded', 'false');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleExpand(this);
+                }
+            });
+        });
 
         // Search
         function handleSearch(event) {
             const query = event.target.value.toLowerCase();
-            if (query.length < 2) return;
+
+            // Reset view if query is too short
+            if (query.length < 2) {
+                document.querySelectorAll('.card').forEach(card => {
+                    card.classList.remove('hidden', 'search-highlight');
+                });
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = '';
+                });
+                return;
+            }
 
             // Search through all cards
             const cards = document.querySelectorAll('.card');
@@ -7118,18 +7299,21 @@
                 const text = card.textContent.toLowerCase();
                 if (text.includes(query)) {
                     card.classList.remove('hidden');
-                    card.style.borderColor = 'var(--accent)';
+                    card.classList.add('search-highlight');
                 } else {
                     card.classList.add('hidden');
+                    card.classList.remove('search-highlight');
                 }
             });
 
-            // Show all sections that have matching content
+            // Show sections with matches, hide those without
             document.querySelectorAll('.section').forEach(section => {
                 const hasVisibleCards = section.querySelectorAll('.card:not(.hidden)').length > 0;
                 const hasTextMatch = section.textContent.toLowerCase().includes(query);
                 if (hasVisibleCards || hasTextMatch) {
                     section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
                 }
             });
         }
@@ -7138,8 +7322,7 @@
         document.getElementById('searchInput').addEventListener('input', function() {
             if (this.value === '') {
                 document.querySelectorAll('.card').forEach(card => {
-                    card.classList.remove('hidden');
-                    card.style.borderColor = '';
+                    card.classList.remove('hidden', 'search-highlight');
                 });
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = '';
@@ -7197,6 +7380,7 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 900) {
+                    nav.classList.remove('open');
                     navOverlay.classList.remove('visible');
                     document.body.style.overflow = '';
                 }
