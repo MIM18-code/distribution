@@ -506,28 +506,135 @@
         .info-box {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-left: 3px solid var(--info);
+            border-left: 4px solid var(--info);
             padding: 24px 28px;
             margin: 32px 0;
             position: relative;
         }
 
-        .info-box.warning { border-left-color: var(--caution); }
-        .info-box.danger { border-left-color: var(--danger); }
-        .info-box.success { border-left-color: var(--trust); }
-        .info-box.purple { border-left-color: var(--purple); }
+        .info-box.warning {
+            border-left-color: var(--caution);
+            background: linear-gradient(90deg, var(--caution-muted) 0%, var(--surface) 100%);
+        }
+        .info-box.danger {
+            border-left-color: var(--danger);
+            border-left-width: 5px;
+            background: linear-gradient(90deg, var(--danger-muted) 0%, var(--surface) 100%);
+        }
+        .info-box.success {
+            border-left-color: var(--trust);
+            background: linear-gradient(90deg, var(--trust-muted) 0%, var(--surface) 100%);
+        }
+        .info-box.purple {
+            border-left-color: var(--purple);
+            background: linear-gradient(90deg, var(--purple-muted) 0%, var(--surface) 100%);
+        }
 
         .info-box h4 {
             font-family: 'Fraunces', Georgia, serif;
             font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box.danger h4 {
+            font-size: 1.15rem;
+            color: var(--danger);
+        }
+
+        .info-box.warning h4 {
+            color: var(--caution);
         }
 
         .info-box p {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.65;
+        }
+
+        .info-box ul {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 12px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .info-box ul li {
+            margin-bottom: 6px;
+        }
+
+        .info-box .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 8px 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+        }
+
+        .info-box .action-link:hover {
+            background: var(--surface-elevated);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Critical Alert Banner - highest severity */
+        .critical-alert {
+            background: var(--danger);
+            color: white;
+            padding: 20px 28px;
+            margin: 0 0 32px 0;
+            position: relative;
+            border: none;
+        }
+
+        .critical-alert h4 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .critical-alert p {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .critical-alert ul {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 12px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .critical-alert .action-link {
+            background: white;
+            color: var(--danger);
+            border-color: white;
+        }
+
+        .critical-alert .action-link:hover {
+            background: rgba(255,255,255,0.9);
         }
 
         /* Tier Labels */
@@ -1064,9 +1171,28 @@
                 </div>
             </div>
 
+            <div class="critical-alert">
+                <h4>⛔ Stop Before You Sign</h4>
+                <p>Distribution contracts can grant expansive rights and recoupment terms that transfer your film's value for little return. Predatory practices are common—filmmakers have lost all rights by signing without scrutiny.</p>
+                <ul>
+                    <li><strong>Research the principals:</strong> Check if they've bankrupted previous companies</li>
+                    <li><strong>Cap all expenses:</strong> Uncapped "marketing" deductions ensure you see $0</li>
+                    <li><strong>Get legal review:</strong> Consult an entertainment attorney before signing anything</li>
+                    <li><strong>Verify claims:</strong> "Guaranteed Netflix placement" is almost always a lie</li>
+                </ul>
+                <a href="#redflags" class="action-link">📋 View Full Red Flags Checklist</a>
+                <a href="https://www.volunteerlawyersforthearts.org/" target="_blank" class="action-link" style="margin-left: 8px;">⚖️ Find Legal Help (VLA)</a>
+            </div>
+
             <div class="info-box danger">
-                <h4>🚨 2025-2026 Alert</h4>
-                <p><strong>High Octane Pictures</strong> filed Chapter 7 bankruptcy (Aug 2025). <strong>1091 Pictures/CSSE</strong> liquidated (July 2024). Multiple distributors flagged for non-payment, copyright trolling, and "Phoenix schemes" (bankrupting one company, relaunching under new name). This guide documents verified court cases, IFTA arbitrations, and filmmaker testimony with specific citations.</p>
+                <h4>🚨 2025-2026 Industry Alert</h4>
+                <p>Multiple distributors have collapsed or been flagged for fraud:</p>
+                <ul>
+                    <li><strong>High Octane Pictures:</strong> Filed Chapter 7 bankruptcy (Aug 2025)—principals now operating as "Rebel Raider"</li>
+                    <li><strong>1091 Pictures/CSSE:</strong> Liquidated (July 2024)</li>
+                    <li><strong>"Phoenix schemes":</strong> Distributors bankrupting companies to erase royalty debts, then relaunching under new names</li>
+                </ul>
+                <p style="margin-top: 12px;">This guide documents verified court cases, IFTA arbitrations, and filmmaker testimony with specific citations.</p>
             </div>
 
             <div class="tier-section" style="margin-top: 24px;">
@@ -1235,9 +1361,19 @@
             </div>
 
             <div class="info-box warning">
-                <h4>⚠️ The AVOD Black Box</h4>
-                <p>AVOD revenue is structurally opaque—and this applies to ALL distributors, not just bad actors. CPMs fluctuate by time of day, viewer geography, and advertiser demand ($4-$15 range on Tubi alone). Distributors with volume leverage negotiate "Preferred Partner" rates via Master Licensing Agreements that filmmakers can't audit. The percentage you're promised is a percentage of what they <em>report</em>, not necessarily what they collected. Without access to platform-level data (protected by NDA), you have no way to verify.</p>
-                <p style="margin-top: 12px;"><strong>Defense:</strong> Demand contracts that define "Gross Receipts" as "all monies received by Distributor and its affiliates from exploitation of the Picture"—specifically including volume bonuses and ad network rebates. For maximum transparency, consider flat-fee aggregators (Bitmax, Quiver) where you keep 100% of whatever platforms report directly to you.</p>
+                <h4>⚠️ The AVOD Black Box Problem</h4>
+                <p>AVOD revenue is structurally opaque—and this applies to ALL distributors, not just bad actors.</p>
+                <ul>
+                    <li><strong>CPMs vary wildly:</strong> $4-$15 range on Tubi alone, depending on time, geography, and advertiser demand</li>
+                    <li><strong>Hidden volume deals:</strong> Distributors negotiate "Preferred Partner" rates you can't audit</li>
+                    <li><strong>You see reported, not collected:</strong> Your percentage is based on what they claim, not necessarily what they received</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>How to protect yourself:</strong></p>
+                <ul>
+                    <li><strong>Define "Gross Receipts" explicitly:</strong> Include "all monies received by Distributor and its affiliates"—specifically volume bonuses and ad network rebates</li>
+                    <li><strong>Consider flat-fee aggregators:</strong> Bitmax, Quiver let you keep 100% of what platforms report directly to you</li>
+                    <li><strong>Demand audit rights:</strong> Ensure you can verify their accounting</li>
+                </ul>
             </div>
 
             <div class="prose">
@@ -1573,7 +1709,13 @@
 
             <div class="info-box warning" style="margin-top: 16px;">
                 <h4>⚠️ The "Marketing Fee" Illusion</h4>
-                <p>Distributors who justify high expense caps ($25K) by claiming they attend Cannes/AFM: They attend these markets anyway to sell their entire catalog. Charging your film a flat "market fee" ($5,000) to have a poster on a digital display is a profit center for them. Unless they're hosting a dedicated screening or buying trade ads specifically for your film, this is fee extraction.</p>
+                <p>Distributors who justify high expense caps ($25K) by claiming market attendance are often extracting fees, not marketing your film.</p>
+                <ul>
+                    <li><strong>They attend anyway:</strong> Cannes/AFM trips are for their entire catalog, not just your film</li>
+                    <li><strong>Poster on digital display ≠ marketing:</strong> $5,000 "market fee" for a poster is a profit center for them</li>
+                    <li><strong>Legitimate marketing includes:</strong> Dedicated screenings, trade ads specifically for your film, buyer meetings scheduled for your title</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Ask specifically:</strong> "What marketing activities will be done exclusively for my film?" If they can't answer, it's fee extraction.</p>
             </div>
         </section>
 
@@ -2381,8 +2523,15 @@
             </div>
 
             <div class="info-box danger">
-                <h4>🚫 Warning</h4>
-                <p>These companies have generated significant complaints from filmmakers. Some operate lawfully but with business models that shift all risk to the creator. Others have documented histories of non-payment or legal disputes.</p>
+                <h4>🚫 High-Risk Distributors Warning</h4>
+                <p>These companies have generated significant complaints from filmmakers. Before signing with any distributor listed here:</p>
+                <ul>
+                    <li><strong>Research thoroughly:</strong> Search the company name + "scam" or "lawsuit" on Reddit/Google</li>
+                    <li><strong>Contact other filmmakers:</strong> Ask past clients directly about their experience</li>
+                    <li><strong>Get legal review:</strong> Have an entertainment attorney review ANY contract</li>
+                    <li><strong>Check PACER:</strong> Search federal court records for lawsuits involving the company</li>
+                </ul>
+                <p style="margin-top: 12px;"><em>Some operate lawfully but with business models that shift all risk to the creator. Others have documented histories of non-payment or legal disputes.</em></p>
             </div>
 
             <div class="tier-section">
@@ -3348,15 +3497,34 @@
             </div>
 
             <div class="info-box danger">
-                <h4>⚠️ Distribber Cautionary Tale</h4>
-                <p>Distribber (owned by GoDigital) collapsed in 2019. Offices closed without warning; website remained live. Thousands of filmmakers affected, some waiting a year for owed royalties. An attorney called for criminal investigation.</p>
-                <p style="margin-top: 12px;"><strong>Lessons:</strong> Never assume aggregators are permanent. Ask if royalties are held in separate escrow. Prefer non-exclusive contracts. Keep your own records. Watch for warning signs: slow communication, delayed payments.</p>
+                <h4>⚠️ Distribber Cautionary Tale: Lessons for All Aggregators</h4>
+                <p>Distribber (owned by GoDigital) collapsed in 2019. Offices closed without warning; website remained live. Thousands of filmmakers affected, some waiting a year for owed royalties.</p>
+                <p style="margin-top: 12px;"><strong>Protect yourself from aggregator collapse:</strong></p>
+                <ul>
+                    <li><strong>Never assume permanence:</strong> Any aggregator can collapse—diversify your distribution</li>
+                    <li><strong>Ask about escrow:</strong> "Are royalties held in separate escrow accounts?"</li>
+                    <li><strong>Prefer non-exclusive:</strong> Non-exclusive contracts let you pivot if needed</li>
+                    <li><strong>Keep your own records:</strong> Track all revenue independently</li>
+                    <li><strong>Watch for warning signs:</strong> Slow communication, delayed payments, staff departures</li>
+                </ul>
             </div>
 
             <div class="info-box warning">
                 <h4>⚠️ The "Spending Money to Not Get On" Trap</h4>
-                <p>A filmmaker pays Bitmax ~$2,200 to deliver to iTunes, Amazon, and Tubi. iTunes accepts it but the film sells 0 copies (no marketing budget). Amazon accepts it but "suppresses" the title due to low traffic. Tubi rejects it because the sound mix was deemed amateur. Net result: $2,200 spent for a live iTunes link generating $0.</p>
-                <p style="margin-top: 12px;"><strong>Rule:</strong> Don't use upfront-fee aggregators unless you have a confirmed marketing budget to drive traffic. For films relying on organic discovery alone, revenue-share models (Filmhub, Indie Rights) are safer—the aggregator shares the risk of rejection. Only pay upfront when you have a calculated ROI plan.</p>
+                <p><strong>Real scenario:</strong> A filmmaker pays Bitmax ~$2,200 to deliver to iTunes, Amazon, and Tubi. Result:</p>
+                <ul>
+                    <li><strong>iTunes:</strong> Accepted, but sells 0 copies (no marketing budget)</li>
+                    <li><strong>Amazon:</strong> Accepted, then "suppressed" due to low traffic</li>
+                    <li><strong>Tubi:</strong> Rejected—sound mix deemed amateur</li>
+                    <li><strong>Net result:</strong> $2,200 spent for a live iTunes link generating $0</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Before paying upfront aggregator fees, ask yourself:</strong></p>
+                <ul>
+                    <li>Do I have a marketing budget to drive traffic? (If no → use revenue-share model)</li>
+                    <li>Does my film meet platform QC standards? (Audio, video quality)</li>
+                    <li>What's my calculated ROI if accepted?</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Safer alternative:</strong> Revenue-share models (Filmhub, Indie Rights) let the aggregator share the risk of rejection.</p>
             </div>
         </section>
 
@@ -3884,9 +4052,16 @@
                 </ul>
             </div>
 
-            <div class="info-box warning">
-                <h4>⚠️ Critical Warning</h4>
-                <p><strong>Standard practice: Sales agents do NOT charge upfront fees.</strong> If any agent seeks an advance, demand proof of what they've done for similar films recently. An agent asking for $5,000+ upfront without proven track record is a major warning sign.</p>
+            <div class="info-box danger">
+                <h4>⚠️ Critical Warning: Sales Agent Fees</h4>
+                <p><strong>Standard practice: Legitimate sales agents do NOT charge upfront fees.</strong> They work on commission (10-25%).</p>
+                <ul>
+                    <li><strong>Red flag:</strong> Any agent asking for $5,000+ upfront without proven track record</li>
+                    <li><strong>If they claim expenses:</strong> Ask for itemized breakdown of what exactly the money covers</li>
+                    <li><strong>Demand proof:</strong> Request recent sales reports for similar films they've represented</li>
+                    <li><strong>Verify claims:</strong> Contact other filmmakers on their roster directly</li>
+                </ul>
+                <p style="margin-top: 12px;"><em>Legitimate agents have enough deal flow that they don't need your cash upfront—they make money when you make money.</em></p>
             </div>
 
             <h3 style="margin: 32px 0 16px;">Reputable US Sales Agents</h3>
@@ -4448,7 +4623,13 @@
 
             <div class="info-box warning">
                 <h4>⚠️ The "Worldwide" Trap</h4>
-                <p>Be wary of granting "Worldwide Rights" to domestic distributor unless they have proven output deals with foreign sub-distributors. A US distributor with no foreign partners will "sit" on German rights, preventing you from selling them elsewhere.</p>
+                <p>Be wary of granting "Worldwide Rights" to a domestic distributor. This can lock up valuable territories you could monetize elsewhere.</p>
+                <ul>
+                    <li><strong>Ask specifically:</strong> "What foreign output deals do you have? With which territories?"</li>
+                    <li><strong>Get proof:</strong> Request a list of their active international partners</li>
+                    <li><strong>The problem:</strong> A US distributor with no foreign partners will "sit" on German, UK, or Asian rights—preventing you from selling them</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Better approach:</strong> Grant territory-specific rights, or negotiate carve-outs for regions where they have no proven distribution.</p>
             </div>
         </section>
 
@@ -4508,8 +4689,15 @@
             </div>
 
             <div class="info-box danger">
-                <h4>Legal Minefield</h4>
-                <p>The 2025 SAG-AFTRA Agreements and California's AB 2602 introduced strict regulations around "Digital Replicas" and "Synthetic Performers." Vague "all media now known or hereafter devised" clauses are insufficient. You need explicit language.</p>
+                <h4>⚠️ AI Rights: Legal Minefield</h4>
+                <p>The 2025 SAG-AFTRA Agreements and California's AB 2602 introduced strict regulations. Vague boilerplate is no longer sufficient.</p>
+                <ul>
+                    <li><strong>DEMAND explicit AI clause:</strong> "No AI Training Rights" must be in writing</li>
+                    <li><strong>Check for hidden language:</strong> Watch for "machine learning," "generative," or "synthetic" in rights grants</li>
+                    <li><strong>Protect your talent:</strong> Your actors' likenesses may be exploited without proper clauses</li>
+                    <li><strong>Reserve all rights:</strong> Any right not explicitly granted should remain with you</li>
+                </ul>
+                <p style="margin-top: 12px;"><em>Distributors may claim "training rights" under broad boilerplate. This can breach your talent contracts and expose you to liability.</em></p>
             </div>
 
             <div class="prose">
@@ -5174,10 +5362,20 @@
 
             <div class="info-box danger">
                 <h4>🚫 The "Money Pit" Filter – Red Flags in Film PR</h4>
-                <p>Be wary of PR firms that promise the moon for a hefty monthly retainer but deliver little of value. Common scams include:</p>
-                <p><strong>Press-Release Mills:</strong> Agencies that charge ~$2K–$5K/month and do little beyond writing a generic press release and blasting it to random websites. Your news winds up on auto-generated "news" sites with zero real readership. Paying thousands for this yields no better exposure than posting on social media yourself.</p>
-                <p><strong>Pay-to-Play "Magazine" Features:</strong> If a so-called media outlet offers to feature your film for a fee, it's likely a scam. Vanity magazines solicit artists to buy spots in "Top 10 to Watch" lists or awards that have no real merit. These have no impact on genuine audiences or distributors.</p>
-                <p><strong>Bottom Line:</strong> Any PR firm that cannot show specific <em>earned</em> media placements (reviews, interviews in recognizable publications) is not worth your money. Always ask for recent campaign examples and actual press clippings before signing.</p>
+                <p>Be wary of PR firms that promise the moon for a hefty monthly retainer but deliver little of value.</p>
+                <p style="margin-top: 12px;"><strong>Common PR scams to avoid:</strong></p>
+                <ul>
+                    <li><strong>Press-Release Mills:</strong> Charge ~$2K–$5K/month to blast generic releases to auto-generated "news" sites with zero readership</li>
+                    <li><strong>Pay-to-Play Features:</strong> Vanity magazines selling "Top 10 to Watch" spots—these have no impact on real audiences</li>
+                    <li><strong>Vague "Connections":</strong> Claims of industry relationships without specific, verifiable placements</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Before signing with any PR firm, DEMAND:</strong></p>
+                <ul>
+                    <li>Specific examples of <em>earned</em> media placements (not paid)</li>
+                    <li>Recent campaign case studies with actual press clippings</li>
+                    <li>Names of recognizable publications they've placed clients in</li>
+                </ul>
+                <p style="margin-top: 12px;"><em>If they can't show real results, you'll get similar exposure posting on social media yourself—for free.</em></p>
             </div>
 
             <div class="tier-section">
@@ -5664,8 +5862,14 @@
             </div>
 
             <div class="info-box danger">
-                <h4>The Myth That Destroys Deals</h4>
-                <p><strong>There is no 30-second rule.</strong> This is the most dangerous myth in independent filmmaking. No provision in copyright law allows using 30 seconds of music without permission. The Supreme Court has ruled that infringement can occur even with minimal use if it takes the "heart" of the work. A three-second clip can constitute infringement.</p>
+                <h4>⛔ The Myth That Destroys Distribution Deals</h4>
+                <p><strong>There is no 30-second rule.</strong> This is the most dangerous myth in independent filmmaking.</p>
+                <ul>
+                    <li><strong>No legal basis:</strong> No provision in copyright law allows using ANY amount of music without permission</li>
+                    <li><strong>Even 3 seconds can infringe:</strong> The Supreme Court ruled infringement can occur with minimal use if it takes the "heart" of the work</li>
+                    <li><strong>Distributors will reject you:</strong> Netflix, Amazon, and major distributors require verified clearances for ALL music</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Action required:</strong> Clear every piece of music (sync + master licenses) or use royalty-free alternatives. No exceptions.</p>
             </div>
 
             <div class="prose">
@@ -6551,6 +6755,24 @@
                 <p>The desperation of independent filmmakers has birthed a predatory "scam economy." Know what to watch for.</p>
             </div>
 
+            <div class="critical-alert">
+                <h4>🚩 Quick Red Flag Checklist</h4>
+                <p>If ANY of these apply to a potential distributor or deal, STOP and investigate further:</p>
+                <ul>
+                    <li>☐ They request upfront fees (legitimate agents work on commission)</li>
+                    <li>☐ They promise "guaranteed" Netflix/Hulu placement</li>
+                    <li>☐ Contract includes uncapped or vague expense deductions</li>
+                    <li>☐ Terms exceed 10 years without performance clauses</li>
+                    <li>☐ They use Gmail/generic email instead of company domain</li>
+                    <li>☐ They can't provide recent sales reports for similar films</li>
+                    <li>☐ Contract mentions "AI training," "machine learning," or "synthetic" rights</li>
+                    <li>☐ No bankruptcy reversion clause included</li>
+                    <li>☐ The company is new but principals ran previous failed distributors</li>
+                </ul>
+                <a href="https://www.volunteerlawyersforthearts.org/" target="_blank" class="action-link">⚖️ Get Free Legal Help (VLA)</a>
+                <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank" class="action-link" style="margin-left: 8px;">📋 Check Distributor Report Card</a>
+            </div>
+
             <div class="card-grid">
                 <div class="card">
                     <div class="card-header">
@@ -6644,18 +6866,22 @@
                 <h3>Fake Festival Warning (2025)</h3>
                 <p>Scammers use AI to create photorealistic images of "festival audiences," "awards ceremonies," and "laurels." Look for: inconsistent hands, repeating patterns in crowd faces, nonsensical text on banners. Many fake festivals offer "Guaranteed Distribution" as a prize—funneling you into predatory aggregator deals. FilmFreeway has thousands of "festivals" with no physical footprint. VERIFY through third-party sources (alumni, press coverage) before submitting.</p>
 
-                <h3>Protect Yourself</h3>
+            </div>
+
+            <div class="info-box success" style="margin-top: 32px;">
+                <h4>✅ Protect Yourself: Action Checklist</h4>
+                <p><strong>Before signing ANY distribution deal, complete these steps:</strong></p>
                 <ul>
-                    <li><strong>Research via Film Collaborative's Distributor Report Card:</strong> <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank">thefilmcollaborative.org/distripedia/distributorreportcard/</a> — Anonymous filmmaker feedback on deal terms, communication, and performance</li>
-                    <li>Check Facebook groups ("Protect Yourself From Predatory Film Distributors/Aggregators")</li>
-                    <li>Ask how royalties are held (separate escrow accounts?)</li>
-                    <li>Get legal advice before signing any contract</li>
-                    <li>Contact other filmmakers on their roster directly via social media</li>
-                    <li>Insist on expense caps in writing</li>
-                    <li>Prefer shorter terms (7 years max where possible)</li>
-                    <li>Demand audit rights</li>
-                    <li>Seek non-exclusive deals where available</li>
+                    <li><strong>Research the distributor:</strong> Check <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank" style="color: var(--trust);">Film Collaborative's Distributor Report Card</a> for anonymous filmmaker feedback</li>
+                    <li><strong>Search for complaints:</strong> Google "[company name] scam" and check r/Filmmakers</li>
+                    <li><strong>Join protection groups:</strong> Facebook's "Protect Yourself From Predatory Film Distributors/Aggregators"</li>
+                    <li><strong>Ask about escrow:</strong> "Are royalties held in separate escrow accounts?"</li>
+                    <li><strong>Get legal review:</strong> Consult an entertainment attorney before signing—<a href="https://www.volunteerlawyersforthearts.org/" target="_blank" style="color: var(--trust);">VLA offers free help</a></li>
+                    <li><strong>Contact roster filmmakers:</strong> Reach out to other filmmakers on their roster via social media</li>
+                    <li><strong>Negotiate key terms:</strong> Expense caps in writing, shorter terms (7 years max), audit rights, non-exclusive where possible</li>
                 </ul>
+                <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank" class="action-link">📋 Check Report Card</a>
+                <a href="https://www.volunteerlawyersforthearts.org/" target="_blank" class="action-link" style="margin-left: 8px;">⚖️ Get Legal Help</a>
             </div>
         </section>
 
@@ -6746,6 +6972,18 @@
                 <p><strong>The Law:</strong> A bankruptcy trustee may abandon any property of the estate that is "burdensome" or of "inconsequential value."</p>
                 <p><strong>The Strategy:</strong> Do NOT wait for the trustee to act. File a motion compelling abandonment, arguing that the distribution contract is a LIABILITY (requiring ongoing accounting/marketing) rather than an asset. If the trustee agrees the contracts have no resale value due to damaged reputation and lack of ongoing marketing, the rights may revert to you by operation of law.</p>
                 <p><strong>Precedent:</strong> In the Redbox bankruptcy, CVS successfully argued for abandonment to remove "unwanted machines" from their stores. Filmmakers can use similar logic to remove "unwanted contracts" from the estate.</p>
+            </div>
+
+            <div class="info-box success" style="margin-top: 24px;">
+                <h4>📚 Legal Resources: Get Help Before You Sign</h4>
+                <p><strong>Don't sign a distribution contract without legal review.</strong> These resources can help:</p>
+                <ul>
+                    <li><strong>Volunteer Lawyers for the Arts (VLA):</strong> Free/low-cost legal services for filmmakers — <a href="https://www.volunteerlawyersforthearts.org/" target="_blank" style="color: var(--trust);">volunteerlawyersforthearts.org</a></li>
+                    <li><strong>California Lawyers for the Arts:</strong> West Coast-focused legal assistance — <a href="https://calawyersforthearts.org/" target="_blank" style="color: var(--trust);">calawyersforthearts.org</a></li>
+                    <li><strong>Mark Litwak:</strong> Entertainment attorney with contract templates ($59-199) — <a href="https://www.marklitwak.com/" target="_blank" style="color: var(--trust);">marklitwak.com</a></li>
+                    <li><strong>Film Collaborative Report Card:</strong> Check distributor reputation — <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank" style="color: var(--trust);">thefilmcollaborative.org</a></li>
+                </ul>
+                <a href="https://www.volunteerlawyersforthearts.org/" target="_blank" class="action-link">⚖️ Find Free Legal Help</a>
             </div>
         </section>
 
