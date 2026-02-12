@@ -372,7 +372,9 @@
         }
 
         .card.defunct {
-            opacity: 0.5;
+            opacity: 1;
+            filter: grayscale(100%);
+            border: 1px dashed var(--danger);
         }
 
         .card.defunct::after {
@@ -426,6 +428,18 @@
             font-size: 0.9rem;
             margin-bottom: 16px;
             line-height: 1.6;
+        }
+
+        .card-content a[href^="#"],
+        .comparison-table a[href^="#"] {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent);
+        }
+
+        .card-content a[href^="#"]:hover,
+        .comparison-table a[href^="#"]:hover {
+            opacity: 0.8;
         }
 
         .card-meta {
@@ -491,6 +505,21 @@
 
         .expandable.expanded .expand-trigger::after {
             transform: rotate(45deg);
+        }
+
+        /* Table Wrapper (mobile overflow) */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 28px 0;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .table-wrapper .comparison-table,
+        .table-wrapper .deliverables-table {
+            border: none;
+            margin: 0;
         }
 
         /* Tables */
@@ -727,6 +756,7 @@
         .tier-dot.caution { background: var(--caution); box-shadow: 0 0 8px var(--caution); }
         .tier-dot.avoid { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
         .tier-dot.purple { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+        .tier-dot.info { background: var(--info); box-shadow: 0 0 8px var(--info); }
 
         /* Prose */
         .prose { max-width: 660px; }
@@ -909,6 +939,13 @@
 
         /* Mobile */
         @media (max-width: 900px) {
+            .comparison-table,
+            .deliverables-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .nav-container {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
@@ -1163,7 +1200,7 @@
         </div>
 
         <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search distributors, terms..." onkeyup="handleSearch(event)">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search distributors, terms...">
         </div>
 
         <div class="nav-section">
@@ -1284,12 +1321,12 @@
                             <span class="card-badge badge-avoid">Do Not Sign</span>
                         </div>
                         <div class="card-content">
-                            <strong>High Octane / Rebel Raider</strong> (Chapter 7 bankruptcy)<br>
-                            <strong>Wild Eye Releasing</strong> (class action threat, non-payment)<br>
-                            <strong>Uncork'd Entertainment</strong> (ghosting, rights hostage)<br>
-                            <strong>Breaking Glass Pictures</strong> (copyright trolling, 0% recoupment)<br>
-                            <strong>ITN Distribution</strong> (mockbuster mill, poster fraud)<br>
-                            <strong>Adler & Associates</strong> (documentary exposé, FTC connection)
+                            <a href="#card-high-octane"><strong>High Octane / Rebel Raider</strong></a> (Chapter 7 bankruptcy)<br>
+                            <a href="#card-wild-eye"><strong>Wild Eye Releasing</strong></a> (class action threat, non-payment)<br>
+                            <a href="#card-uncorkd"><strong>Uncork'd Entertainment</strong></a> (ghosting, rights hostage)<br>
+                            <a href="#card-breaking-glass"><strong>Breaking Glass Pictures</strong></a> (copyright trolling, 0% recoupment)<br>
+                            <a href="#card-itn"><strong>ITN Distribution</strong></a> (mockbuster mill, poster fraud)<br>
+                            <a href="#card-adler"><strong>Adler & Associates</strong></a> (documentary exposé, FTC connection)
                         </div>
                     </div>
 
@@ -1299,11 +1336,11 @@
                             <span class="card-badge badge-caution">High Risk</span>
                         </div>
                         <div class="card-content">
-                            <strong>Gravitas Ventures</strong> ($25K-$50K expense caps = $0 to you)<br>
-                            <strong>Freestyle Digital Media</strong> ($10K-$15K upfront fees)<br>
-                            <strong>Terror Films</strong> (Gravitas backend, COO conflict)<br>
-                            <strong>BayView Entertainment</strong> (Passion River scandal)<br>
-                            <strong>Vision Films</strong> (copyright trolling history)
+                            <a href="#card-gravitas"><strong>Gravitas Ventures</strong></a> ($25K-$50K expense caps = $0 to you)<br>
+                            <a href="#card-vision-films"><strong>Vision Films</strong></a> (copyright trolling, active litigation)<br>
+                            <a href="#card-freestyle"><strong>Freestyle Digital Media</strong></a> ($10K-$15K upfront fees)<br>
+                            <a href="#card-terror-films"><strong>Terror Films</strong></a> (Gravitas backend, COO conflict)<br>
+                            <a href="#card-bayview"><strong>BayView Entertainment</strong></a> (Passion River scandal)
                         </div>
                     </div>
 
@@ -1313,11 +1350,11 @@
                             <span class="card-badge badge-trust">Verified</span>
                         </div>
                         <div class="card-content">
-                            <strong>Dark Sky Films / MPI</strong> (consistent MGs, horror focus)<br>
-                            <strong>Kino Lorber</strong> (gold standard, transparent)<br>
-                            <strong>Raven Banner</strong> (filmmaker-founded, festival circuit)<br>
-                            <strong>Wolfe Releasing</strong> (LGBTQ+ horror, MG verified)<br>
-                            <strong>Arrow / Vinegar Syndrome</strong> (boutique physical)
+                            <a href="#card-dark-sky"><strong>Dark Sky Films / MPI</strong></a> (consistent MGs, horror focus)<br>
+                            <a href="#card-kino-lorber"><strong>Kino Lorber</strong></a> (gold standard, transparent)<br>
+                            <a href="#card-raven-banner"><strong>Raven Banner</strong></a> (filmmaker-founded, festival circuit)<br>
+                            <a href="#card-wolfe"><strong>Wolfe Releasing</strong></a> (LGBTQ+ horror, MG verified)<br>
+                            <a href="#card-arrow"><strong>Arrow</strong></a> / <a href="#card-vinegar-syndrome"><strong>Vinegar Syndrome</strong></a> (boutique physical)
                         </div>
                     </div>
                 </div>
@@ -1501,97 +1538,97 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Terror Films</strong></td>
+                        <td><a href="#card-terror-films"><strong>Terror Films</strong></a></td>
                         <td><span class="card-badge badge-avoid">High Risk</span></td>
                         <td>—</td>
                         <td>2025 PR meltdown, shovelware pivot, leadership instability</td>
                     </tr>
                     <tr>
-                        <td><strong>Indie Rights</strong></td>
+                        <td><a href="#card-indie-rights"><strong>Indie Rights</strong></a></td>
                         <td><span class="card-badge badge-caution">Mixed</span></td>
                         <td>80/20 split, 3-year term, honest accounting</td>
                         <td>No marketing, poor communication, 20% for minimal value?</td>
                     </tr>
                     <tr>
-                        <td><strong>Dark Sky Films / MPI</strong></td>
+                        <td><a href="#card-dark-sky"><strong>Dark Sky Films / MPI</strong></a></td>
                         <td><span class="card-badge badge-trust">Trust</span></td>
                         <td>Elevated horror, theatrical capability</td>
                         <td>Higher quality bar required</td>
                     </tr>
                     <tr>
-                        <td><strong>Vision Films</strong></td>
-                        <td><span class="card-badge badge-caution">Mixed</span></td>
-                        <td>Star-driven indies</td>
-                        <td>BGP-similar complaints, high expense recoupments, self-dealing concerns</td>
+                        <td><a href="#card-vision-films"><strong>Vision Films</strong></a></td>
+                        <td><span class="card-badge badge-avoid">Avoid</span></td>
+                        <td>—</td>
+                        <td>Copyright trolling, $25K expense trap, active litigation (Sayre v. Vision 2026)</td>
                     </tr>
                     <tr>
-                        <td><strong>Gravitas Ventures</strong></td>
+                        <td><a href="#card-gravitas"><strong>Gravitas Ventures</strong></a></td>
                         <td><span class="card-badge badge-avoid">Structural Trap</span></td>
                         <td>—</td>
                         <td>$25K-$50K expense caps = $0 to filmmakers; one got $0.06 over 7 years</td>
                     </tr>
                     <tr>
-                        <td><strong>Uncork'd Entertainment</strong></td>
+                        <td><a href="#card-uncorkd"><strong>Uncork'd Entertainment</strong></a></td>
                         <td><span class="card-badge badge-avoid">CRITICAL</span></td>
                         <td>—</td>
                         <td>Non-payment, ghosting, High Octane link, won't revert rights</td>
                     </tr>
                     <tr>
-                        <td><strong>Breaking Glass Pictures</strong></td>
+                        <td><a href="#card-breaking-glass"><strong>Breaking Glass Pictures</strong></a></td>
                         <td><span class="card-badge badge-avoid">CRITICAL</span></td>
                         <td>—</td>
                         <td>Copyright trolling (100s of lawsuits), black box accounting, 0% recoupment</td>
                     </tr>
                     <tr>
-                        <td><strong>Cinedigm/Cineverse</strong></td>
+                        <td><a href="#card-cineverse"><strong>Cinedigm/Cineverse</strong></a></td>
                         <td><span class="card-badge badge-caution">Caution</span></td>
                         <td>Owns Screambox/Fandor, Terrifier 3 ($90M+), massive reach</td>
                         <td>Backend litigation active; demand "Gross Corridor" deals</td>
                     </tr>
                     <tr>
-                        <td><strong>Green Apple (GAE)</strong></td>
+                        <td><a href="#card-green-apple"><strong>Green Apple (GAE)</strong></a></td>
                         <td><span class="card-badge badge-avoid">Avoid</span></td>
                         <td>—</td>
                         <td>"Destroyed opportunities," zero effort</td>
                     </tr>
                     <tr>
-                        <td><strong>Summer Hill Films</strong></td>
+                        <td><a href="#card-summer-hill"><strong>Summer Hill Films</strong></a></td>
                         <td><span class="card-badge badge-avoid">Avoid</span></td>
                         <td>—</td>
                         <td>"Never a dime," P.O. Box red flag</td>
                     </tr>
                     <tr>
-                        <td><strong>ITN Distribution</strong></td>
+                        <td><a href="#card-itn"><strong>ITN Distribution</strong></a></td>
                         <td><span class="card-badge badge-avoid">CRITICAL</span></td>
                         <td>—</td>
                         <td>Mockbuster mill, "poster fraud," cross-collateralized accounting, brand damage</td>
                     </tr>
                     <tr>
-                        <td><strong>High Octane / Rebel Raider</strong></td>
+                        <td><a href="#card-high-octane"><strong>High Octane / Rebel Raider</strong></a></td>
                         <td><span class="card-badge badge-avoid">BLACKLIST</span></td>
                         <td>—</td>
                         <td>CHAPTER 7 LIQUIDATION (Aug 2025), $2M+ debt, Phoenix scheme active</td>
                     </tr>
                     <tr>
-                        <td><strong>Wild Eye Releasing</strong></td>
+                        <td><a href="#card-wild-eye"><strong>Wild Eye Releasing</strong></a></td>
                         <td><span class="card-badge badge-avoid">BLACKLIST</span></td>
                         <td>—</td>
                         <td>Non-payment, ghosting, money laundering suspicions, class action discussions</td>
                     </tr>
                     <tr>
-                        <td><strong>1091 Pictures (CSSE)</strong></td>
+                        <td><a href="#card-1091"><strong>1091 Pictures (CSSE)</strong></a></td>
                         <td><span class="card-badge badge-defunct">BANKRUPT</span></td>
                         <td>—</td>
                         <td>Chapter 7 liquidation July 2024; ~4,000 films trapped; rights frozen</td>
                     </tr>
                     <tr>
-                        <td><strong>FilmHub</strong></td>
+                        <td><a href="#card-filmhub"><strong>FilmHub</strong></a></td>
                         <td><span class="card-badge badge-caution">Medium Risk</span></td>
                         <td>Aggregator if zero budget</td>
                         <td>2025 pay-to-play pivot ($299-$599/quarter), Amazon "hidden rejection"</td>
                     </tr>
                     <tr>
-                        <td><strong>7 Palms Entertainment</strong></td>
+                        <td><a href="#card-7palms"><strong>7 Palms Entertainment</strong></a></td>
                         <td><span class="card-badge badge-avoid">Avoid</span></td>
                         <td>—</td>
                         <td>Upfront marketing fee scam, ghosting after payment</td>
@@ -1603,73 +1640,73 @@
                         <td>⚠️ ZERO payment history, NO track record—wait for verified filmmaker reports</td>
                     </tr>
                     <tr>
-                        <td><strong>DREAD (Epic Pictures)</strong></td>
+                        <td><a href="#card-dread"><strong>DREAD (Epic Pictures)</strong></a></td>
                         <td><span class="card-badge badge-trust">Trust</span></td>
                         <td>Dread Central partnership, accepts submissions, fan base</td>
                         <td>Volume model, some films get lost</td>
                     </tr>
                     <tr>
-                        <td><strong>Scream Team Releasing</strong></td>
+                        <td><a href="#card-scream-team"><strong>Scream Team Releasing</strong></a></td>
                         <td><span class="card-badge badge-trust">Trust</span></td>
                         <td>Filmmaker-founded, non-exclusive, Shudder/Comcast access</td>
                         <td>Smaller operation, limited marketing resources</td>
                     </tr>
                     <tr>
-                        <td><strong>The Coven</strong></td>
+                        <td><a href="#card-the-coven"><strong>The Coven</strong></a></td>
                         <td><span class="card-badge badge-trust">Sales Agent</span></td>
                         <td>Terrifier franchise, high-impact genre results</td>
                         <td>Selective, needs commercial hook</td>
                     </tr>
                     <tr>
-                        <td><strong>Raven Banner</strong></td>
+                        <td><a href="#card-raven-banner"><strong>Raven Banner</strong></a></td>
                         <td><span class="card-badge badge-trust">Sales Agent</span></td>
                         <td>Sales + distribution, 200+ titles, Fantasia pipeline</td>
                         <td>Canadian focus, festival pedigree helps</td>
                     </tr>
                     <tr>
-                        <td><strong>Black Mandala</strong></td>
+                        <td><a href="#card-black-mandala"><strong>Black Mandala</strong></a></td>
                         <td><span class="card-badge badge-trust">Sales Agent</span></td>
                         <td>Low upfront (~$1K), micro-budget friendly, LATAM strength</td>
                         <td>Modest marketing resources</td>
                     </tr>
                     <tr>
-                        <td><strong>1091 Pictures (fka The Orchard)</strong></td>
+                        <td><a href="#card-1091"><strong>1091 Pictures (fka The Orchard)</strong></a></td>
                         <td><span class="card-badge badge-defunct">BANKRUPT</span></td>
                         <td>—</td>
                         <td>CSSE Chapter 7 liquidation July 2024; rights frozen in bankruptcy estate</td>
                     </tr>
                     <tr>
-                        <td><strong>Freestyle Digital Media</strong></td>
+                        <td><a href="#card-freestyle"><strong>Freestyle Digital Media</strong></a></td>
                         <td><span class="card-badge badge-avoid">Avoid</span></td>
                         <td>"Negative MG" - $10K-$15K delivery fees YOU pay</td>
                         <td>Volume operation, zero marketing, ghost support</td>
                     </tr>
                     <tr>
-                        <td><strong>Giant Pictures</strong></td>
+                        <td><a href="#card-giant"><strong>Giant Pictures</strong></a></td>
                         <td><span class="card-badge badge-caution">Caution</span></td>
                         <td>TFC: "Ethical and transparent," good reporting</td>
                         <td>No MG + Exclusivity = upside risk</td>
                     </tr>
                     <tr>
-                        <td><strong>Wolfe Releasing</strong></td>
+                        <td><a href="#card-wolfe"><strong>Wolfe Releasing</strong></a></td>
                         <td><span class="card-badge badge-trust">Trust</span></td>
                         <td>LGBTQ+ specialty, TFC: "Friendly, committed", <strong>PAYS MGs</strong></td>
                         <td>Niche limits crossover, limited marketing budget</td>
                     </tr>
                     <tr>
-                        <td><strong>Indican Pictures</strong></td>
-                        <td><span class="card-badge badge-caution">Caution</span></td>
-                        <td>Personal attention, takes risky/cult films</td>
-                        <td>TFC: Slow, one-sided contracts, mixed transparency</td>
+                        <td><a href="#card-indican"><strong>Indican Pictures</strong></a></td>
+                        <td><span class="card-badge badge-avoid">Avoid</span></td>
+                        <td>—</td>
+                        <td>Heavily one-sided contracts, slow communication, mixed transparency</td>
                     </tr>
                     <tr>
-                        <td><strong>Virgil Films</strong></td>
+                        <td><a href="#card-virgil"><strong>Virgil Films</strong></a></td>
                         <td><span class="card-badge badge-caution">Caution</span></td>
                         <td>TFC: CEO accessible, honest about capabilities</td>
                         <td>Relies on filmmaker marketing, responsiveness drops if film underperforms</td>
                     </tr>
                     <tr>
-                        <td><strong>Greenwich Entertainment</strong></td>
+                        <td><a href="#card-greenwich"><strong>Greenwich Entertainment</strong></a></td>
                         <td><span class="card-badge badge-caution">Caution</span></td>
                         <td>Legitimate theatrical, strong for docs</td>
                         <td>TFC: "Traditional mindset," poor post-deal communication</td>
@@ -1890,7 +1927,7 @@
                 <div class="tier-label"><span class="tier-dot trust"></span>Verified Trustworthy</div>
 
                 <div class="card-grid">
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-dark-sky" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Dark Sky Films / MPI</h3>
                             <span class="card-badge badge-trust">Trustworthy</span>
@@ -1910,7 +1947,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-raven-banner" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Raven Banner Entertainment</h3>
                             <span class="card-badge badge-trust">Trustworthy</span>
@@ -1930,7 +1967,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-kino-lorber" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Kino Lorber</h3>
                             <span class="card-badge badge-trust">Gold Standard</span>
@@ -1954,7 +1991,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-wolfe" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Wolfe Releasing</h3>
                             <span class="card-badge badge-trust">Trustworthy + MG Verified</span>
@@ -2125,7 +2162,7 @@
                 <div class="tier-label"><span class="tier-dot caution"></span>Mixed Reputation</div>
 
                 <div class="card-grid">
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-indie-rights" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Indie Rights</h3>
                             <span class="card-badge badge-caution">Mixed Reviews</span>
@@ -2152,7 +2189,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-giant" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Giant Pictures</h3>
                             <span class="card-badge badge-caution">No MG / Exclusivity</span>
@@ -2223,33 +2260,6 @@
 
                     <div class="card expandable" onclick="toggleExpand(this)">
                         <div class="card-header">
-                            <h3>Vision Films</h3>
-                            <span class="card-badge badge-caution">Caution</span>
-                        </div>
-                        <div class="card-content">
-                            Long-running independent distributor with two big red flags: aggressive copyright litigation history and high recoupable expenses (~$25K) that may prevent filmmakers from ever seeing profits.
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-tag">Copyright Trolling History</span>
-                            <span class="meta-tag">~$25K Expense Cap</span>
-                            <span class="meta-tag">Rare Overages</span>
-                        </div>
-                        <div class="expand-trigger">More details</div>
-                        <div class="expand-content">
-                            <p><strong>The Copyright Trolling Smoking Gun:</strong> Vision Films engaged in mass "copyright trolling" campaigns in the early 2010s, filing federal John Doe lawsuits against alleged BitTorrent downloaders (e.g., Elf-Man, London Has Fallen, Mandolines). A legal blog labeled Vision "a new copyright troll" in 2013, noting how they split lawsuits across jurisdictions to sue hundreds of anonymous individuals for "Blood Money." The goal is not to stop piracy but to monetize it—subpoenaing ISPs for subscriber identities and sending settlement demands ($3,000-$5,000) priced just below the cost of defense. <em>[Source: Fight Copyright Trolls blog, 2013; Justia Federal Case Database]</em></p>
-                            <p><strong>Verified Case: Elf-Man LLC v. John Does 1-101</strong> (W.D. Wash., Case No. 2:12-cv-01499): This 2012-2013 case became notorious when defendants' attorneys presented evidence suggesting the copyright holder's agents were seeding the very files they later sued people for downloading. Judge Robert Bryan found plaintiffs' "investigative firm" (Crystal Bay/Guardaley) used unreliable IP tracking methodology, ultimately dismissing multiple claims. <em>[Source: PACER; FightCopyrightTrolls.com]</em></p>
-                            <p><strong>Guardaley/Crystal Bay Connection:</strong> Evidence suggests Vision Films utilized firms like Guardaley and shell companies (e.g., Crystal Bay, Inc.) to track IP addresses. In some instances, it was alleged that agents of the copyright holder were seeding the files themselves to induce infringement—a particularly predatory tactic. <em>[Source: Electronic Frontier Foundation; TorrentFreak, 2013-2014]</em></p>
-                            <p><strong>BREAKING: Sayre v. Vision Films (January 2026):</strong> New litigation filed in D. Nev. alleges Vision Films failed to provide royalty statements and payments owed under distribution agreement. Complaint mirrors years of informal complaints from filmmakers about Vision's accounting practices. Case is ongoing. <em>[Source: PACER, D. Nev. January 2026]</em></p>
-                            <p><strong>Impact on Producers:</strong> This revenue stream is often categorized as "legal settlements" rather than "sales." Distribution contracts often allow the distributor to deduct legal fees before the producer sees anything. If Vision spends $50,000 on legal fees to recover $60,000 in settlements, the producer may see $0 while the law firm and distributor take their cuts.</p>
-                            <p><strong>The $25K Expense Cap Trap:</strong> Vision Films touts "caps on expenses" and transparent reporting, but in practice that cap is reportedly around $25,000 in marketing and delivery costs off the top. Your film has to earn back $25K before you see a dime of overages. Many indie filmmakers have never seen overage payments.</p>
-                            <p><strong>The Math:</strong> If the cap is $25K and your horror film makes $20K in revenue, you get $0 because it didn't clear the threshold. Even if it makes $30K, the first $25K goes to Vision's expenses, $5K remains—but then Vision also takes their distribution fee (often 25%+). Effective outcome: Filmmakers rarely see profit beyond token initial advances.</p>
-                            <p><strong>One Positive:</strong> Vision offers a "24/7 real-time producer reporting portal"—a significant operational advantage over opaque competitors like Wild Eye.</p>
-                            <p><strong>Bottom Line:</strong> Vision Films is a sophisticated legal machine disguised as a distributor. While they can generate sales and do get films distributed widely, their reliance on copyright trolling litigation introduces ethical and financial complexities that often leave producers behind. The film becomes a vehicle for lawsuits rather than a cult classic.</p>
-                        </div>
-                    </div>
-
-                    <div class="card expandable" onclick="toggleExpand(this)">
-                        <div class="card-header">
                             <h3>Archstone Entertainment</h3>
                             <span class="card-badge badge-caution">Caution</span>
                         </div>
@@ -2290,7 +2300,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-cineverse" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Cineverse (fka Cinedigm)</h3>
                             <span class="card-badge badge-caution">Caution</span>
@@ -2338,7 +2348,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-dread" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>DREAD (Epic Pictures)</h3>
                             <span class="card-badge badge-trust">Fan Favorite</span>
@@ -2360,7 +2370,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-scream-team" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Scream Team Releasing</h3>
                             <span class="card-badge badge-trust">Filmmaker-First</span>
@@ -2487,7 +2497,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable defunct" onclick="toggleExpand(this)">
+                    <div class="card expandable defunct" id="card-1091" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>1091 Pictures (fka The Orchard)</h3>
                             <span class="card-badge badge-defunct">BANKRUPT</span>
@@ -2520,27 +2530,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
-                        <div class="card-header">
-                            <h3>Indican Pictures</h3>
-                            <span class="card-badge badge-caution">Caution</span>
-                        </div>
-                        <div class="card-content">
-                            Small independent with "mom and pop" feel. TFC Report Card: More personal attention than corporate giants, willing to take on weird/cult/risky films others ignore.
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-tag">Personal Touch</span>
-                            <span class="meta-tag">Risk Takers</span>
-                            <span class="meta-tag">One-Sided Contracts</span>
-                        </div>
-                        <div class="expand-trigger">More details</div>
-                        <div class="expand-content">
-                            <p><strong>TFC Feedback:</strong> Smaller size means more personal attention than corporate giant.</p>
-                            <p><strong>Warnings:</strong> Negotiations and communications can be very slow. Initial contracts described as "heavily one-sided" requiring a lawyer to fix. Mixed reviews on transparency and reporting.</p>
-                        </div>
-                    </div>
-
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-virgil" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Virgil Films</h3>
                             <span class="card-badge badge-caution">Caution</span>
@@ -2560,7 +2550,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-greenwich" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Greenwich Entertainment</h3>
                             <span class="card-badge badge-caution">Caution</span>
@@ -2652,7 +2642,7 @@
                 <div class="tier-label"><span class="tier-dot avoid"></span>High Risk / Avoid</div>
 
                 <div class="card-grid">
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-gravitas" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Gravitas Ventures</h3>
                             <span class="card-badge badge-avoid">Structural Trap</span>
@@ -2677,7 +2667,54 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-vision-films" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Vision Films</h3>
+                            <span class="card-badge badge-avoid">Copyright Troll</span>
+                        </div>
+                        <div class="card-content">
+                            Long-running independent distributor with two big red flags: aggressive copyright litigation history and high recoupable expenses (~$25K) that may prevent filmmakers from ever seeing profits. Active litigation (Sayre v. Vision Films, January 2026).
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Copyright Trolling History</span>
+                            <span class="meta-tag">~$25K Expense Cap</span>
+                            <span class="meta-tag">Active Litigation</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>The Copyright Trolling Smoking Gun:</strong> Vision Films engaged in mass "copyright trolling" campaigns in the early 2010s, filing federal John Doe lawsuits against alleged BitTorrent downloaders (e.g., Elf-Man, London Has Fallen, Mandolines). A legal blog labeled Vision "a new copyright troll" in 2013, noting how they split lawsuits across jurisdictions to sue hundreds of anonymous individuals for "Blood Money." The goal is not to stop piracy but to monetize it—subpoenaing ISPs for subscriber identities and sending settlement demands ($3,000-$5,000) priced just below the cost of defense. <em>[Source: Fight Copyright Trolls blog, 2013; Justia Federal Case Database]</em></p>
+                            <p><strong>Verified Case: Elf-Man LLC v. John Does 1-101</strong> (W.D. Wash., Case No. 2:12-cv-01499): This 2012-2013 case became notorious when defendants' attorneys presented evidence suggesting the copyright holder's agents were seeding the very files they later sued people for downloading. Judge Robert Bryan found plaintiffs' "investigative firm" (Crystal Bay/Guardaley) used unreliable IP tracking methodology, ultimately dismissing multiple claims. <em>[Source: PACER; FightCopyrightTrolls.com]</em></p>
+                            <p><strong>Guardaley/Crystal Bay Connection:</strong> Evidence suggests Vision Films utilized firms like Guardaley and shell companies (e.g., Crystal Bay, Inc.) to track IP addresses. In some instances, it was alleged that agents of the copyright holder were seeding the files themselves to induce infringement—a particularly predatory tactic. <em>[Source: Electronic Frontier Foundation; TorrentFreak, 2013-2014]</em></p>
+                            <p><strong>BREAKING: Sayre v. Vision Films (January 2026):</strong> New litigation filed in D. Nev. alleges Vision Films failed to provide royalty statements and payments owed under distribution agreement. Complaint mirrors years of informal complaints from filmmakers about Vision's accounting practices. Case is ongoing. <em>[Source: PACER, D. Nev. January 2026]</em></p>
+                            <p><strong>Impact on Producers:</strong> This revenue stream is often categorized as "legal settlements" rather than "sales." Distribution contracts often allow the distributor to deduct legal fees before the producer sees anything. If Vision spends $50,000 on legal fees to recover $60,000 in settlements, the producer may see $0 while the law firm and distributor take their cuts.</p>
+                            <p><strong>The $25K Expense Cap Trap:</strong> Vision Films touts "caps on expenses" and transparent reporting, but in practice that cap is reportedly around $25,000 in marketing and delivery costs off the top. Your film has to earn back $25K before you see a dime of overages. Many indie filmmakers have never seen overage payments.</p>
+                            <p><strong>The Math:</strong> If the cap is $25K and your horror film makes $20K in revenue, you get $0 because it didn't clear the threshold. Even if it makes $30K, the first $25K goes to Vision's expenses, $5K remains—but then Vision also takes their distribution fee (often 25%+). Effective outcome: Filmmakers rarely see profit beyond token initial advances.</p>
+                            <p><strong>One Positive:</strong> Vision offers a "24/7 real-time producer reporting portal"—a significant operational advantage over opaque competitors like Wild Eye.</p>
+                            <p><strong>Bottom Line:</strong> Vision Films is a sophisticated legal machine disguised as a distributor. While they can generate sales and do get films distributed widely, their reliance on copyright trolling litigation introduces ethical and financial complexities that often leave producers behind. The film becomes a vehicle for lawsuits rather than a cult classic.</p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" id="card-indican" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Indican Pictures</h3>
+                            <span class="card-badge badge-avoid">One-Sided</span>
+                        </div>
+                        <div class="card-content">
+                            Small independent with "mom and pop" feel. Willing to take on weird/cult/risky films others ignore—but initial contracts described as "heavily one-sided" requiring a lawyer to fix. Mixed reviews on transparency and reporting.
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Heavily One-Sided Contracts</span>
+                            <span class="meta-tag">Slow Communication</span>
+                            <span class="meta-tag">Mixed Transparency</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>TFC Feedback:</strong> Smaller size means more personal attention than corporate giant. Willing to take risks on cult films.</p>
+                            <p><strong>Warnings:</strong> Negotiations and communications can be very slow. Initial contracts described as "heavily one-sided" requiring a lawyer to fix. Mixed reviews on transparency and reporting. The combination of one-sided default terms and poor communication makes this a risky choice for filmmakers without legal representation.</p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" id="card-uncorkd" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Uncork'd Entertainment</h3>
                             <span class="card-badge badge-avoid">CRITICAL</span>
@@ -2703,7 +2740,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-breaking-glass" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Breaking Glass Pictures</h3>
                             <span class="card-badge badge-avoid">CRITICAL</span>
@@ -2733,7 +2770,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-wild-eye" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Wild Eye Releasing</h3>
                             <span class="card-badge badge-avoid">BLACKLIST</span>
@@ -2781,7 +2818,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-bayview" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>BayView Entertainment</h3>
                             <span class="card-badge badge-avoid">HIGH RISK</span>
@@ -2828,7 +2865,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-freestyle" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Freestyle Digital Media</h3>
                             <span class="card-badge badge-avoid">Negative MG Risk</span>
@@ -2850,7 +2887,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-green-apple" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Green Apple Entertainment (GAE)</h3>
                             <span class="card-badge badge-avoid">Avoid</span>
@@ -2896,7 +2933,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-terror-films" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Terror Films / Terror Films Releasing</h3>
                             <span class="card-badge badge-avoid">HIGH RISK</span>
@@ -2942,7 +2979,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-summer-hill" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Summer Hill Entertainment / TomCat Films</h3>
                             <span class="card-badge badge-avoid">Avoid</span>
@@ -2969,7 +3006,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-itn" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>ITN Distribution / ITN Flix</h3>
                             <span class="card-badge badge-avoid">CRITICAL</span>
@@ -2994,7 +3031,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-high-octane" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>High Octane / Octane Multimedia / Rebel Raider</h3>
                             <span class="card-badge badge-avoid">BLACKLIST / CHAPTER 7</span>
@@ -3020,7 +3057,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-7palms" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>7 Palms Entertainment</h3>
                             <span class="card-badge badge-avoid">High Caution</span>
@@ -3061,7 +3098,7 @@
                         </div>
                     </div>
 
-                    <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card expandable" id="card-adler" onclick="toggleExpand(this)">
                         <div class="card-header">
                             <h3>Adler & Associates Entertainment (A&AE)</h3>
                             <span class="card-badge badge-avoid">Documented Scam</span>
@@ -3424,7 +3461,7 @@
             </div>
 
             <div class="card-grid">
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-filmhub" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>Filmhub</h3>
                         <span class="card-badge badge-caution">Enshittified</span>
@@ -3453,7 +3490,7 @@
                     </div>
                 </div>
 
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-bitmax" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>Bitmax</h3>
                         <span class="card-badge badge-trust">Professional</span>
@@ -3982,7 +4019,7 @@
                     </div>
                 </div>
 
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-vinegar-syndrome" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>Vinegar Syndrome</h3>
                         <span class="card-badge badge-info">Boutique Elite</span>
@@ -4037,7 +4074,7 @@
                     </div>
                 </div>
 
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-arrow" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>Arrow Video</h3>
                         <span class="card-badge badge-purple">Global Titan</span>
@@ -4933,7 +4970,7 @@
 
             <h3 style="margin: 32px 0 16px;">International Sales Agents</h3>
             <div class="card-grid">
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-the-coven" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>The Coven</h3>
                         <span class="card-badge badge-trust">Horror Powerhouse</span>
@@ -4976,7 +5013,7 @@
                     </div>
                 </div>
 
-                <div class="card expandable" onclick="toggleExpand(this)">
+                <div class="card expandable" id="card-black-mandala" onclick="toggleExpand(this)">
                     <div class="card-header">
                         <h3>Black Mandala</h3>
                         <span class="card-badge badge-trust">Micro-Budget Friendly</span>
@@ -8361,13 +8398,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Amazon Prime Video Direct</h3>
-                        <span class="card-badge badge-trust">Direct Access</span>
+                        <span class="card-badge badge-caution">Restricted Access</span>
                     </div>
                     <div class="card-content">
                         <p><strong>Revenue:</strong> 50% of rental/purchase, ~$0.06-0.15/hour streamed (if included in Prime)</p>
-                        <p><strong>Cost:</strong> Free to upload</p>
-                        <p><strong>Control:</strong> You set pricing, you see real-time analytics</p>
-                        <p><strong>Reality:</strong> This is where most "distributed" indie horror ends up anyway. Why give a distributor 30-50% to put you here?</p>
+                        <p><strong>Cost:</strong> Free to upload (if you have access)</p>
+                        <p><strong>Status:</strong> New account creation effectively closed as of late 2024. Now invite-only or via aggregator (Filmhub). Existing accounts grandfathered in.</p>
+                        <p><strong>Reality:</strong> If you already have a PVD account, use it. If not, access Amazon through Filmhub or another aggregator.</p>
                     </div>
                 </div>
 
@@ -8412,7 +8449,7 @@
             <div class="critical-alert" style="margin-top: 24px;">
                 <h4>💡 The Math That Should Change Your Mind</h4>
                 <p><strong>Scenario A (Bad Distributor):</strong> Sign with distributor offering No MG, 10-year exclusive, $25K expense cap. Your film generates $30K gross over 3 years. After their 40% fee ($12K) and "expenses" ($25K), you receive: <strong style="color: var(--danger);">$0</strong>. Rights locked until 2036.</p>
-                <p style="margin-top: 12px;"><strong>Scenario B (Self-Distribution):</strong> Upload to Amazon Direct yourself. Same film generates $20K gross over 3 years (less reach, but still). Amazon takes 50% ($10K), you receive: <strong style="color: var(--trust);">$10K</strong>. Rights remain yours. You can license to other platforms, sell physical, or sign a REAL deal later.</p>
+                <p style="margin-top: 12px;"><strong>Scenario B (Self-Distribution):</strong> Put your film on Tubi/YouTube via Filmhub (80/20 split) and sell physical via Kunaki. Same film generates $20K gross over 3 years (less reach, but still). After Filmhub's 20% ($4K), you receive: <strong style="color: var(--trust);">$16K</strong>. Rights remain yours. You can license to other platforms, sell physical, or sign a REAL deal later.</p>
                 <p style="margin-top: 12px;"><strong>The lesson:</strong> A "worse" distribution path that you control beats a "better" path controlled by someone who doesn't pay you.</p>
             </div>
 
@@ -8847,9 +8884,7 @@
             // Clear search state
             const searchInput = document.getElementById('searchInput');
             if (searchInput) searchInput.value = '';
-            document.querySelectorAll('.card').forEach(card => {
-                card.classList.remove('hidden', 'search-highlight');
-            });
+            resetSearch();
 
             // Update active nav link
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -8875,6 +8910,7 @@
             link.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
                 showSection(sectionId);
+                window.location.hash = sectionId;
 
                 // Close mobile nav
                 document.getElementById('nav').classList.remove('open');
@@ -8884,15 +8920,40 @@
             });
         });
 
-        // Internal anchor links (e.g., href="#trustworthy")
+        // Handle back/forward browser buttons
+        window.addEventListener('hashchange', function() {
+            const sectionId = window.location.hash.slice(1) || 'overview';
+            showSection(sectionId);
+        });
+
+        // Hash loading moved to end of script (after all function definitions)
+
+        // Internal anchor links (e.g., href="#trustworthy" or href="#card-wild-eye")
         document.addEventListener('click', function(e) {
             const link = e.target.closest('a[href^="#"]');
             if (!link || link.classList.contains('nav-link')) return;
 
-            const sectionId = link.getAttribute('href').slice(1);
-            if (showSection(sectionId)) {
+            const targetId = link.getAttribute('href').slice(1);
+            // Try showing as a section first
+            if (showSection(targetId)) {
                 e.preventDefault();
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo(0, 0);
+                return;
+            }
+            // Otherwise find the element and navigate to its parent section
+            const target = document.getElementById(targetId);
+            if (target) {
+                e.preventDefault();
+                const parentSection = target.closest('.section');
+                if (parentSection) {
+                    showSection(parentSection.id);
+                    window.location.hash = parentSection.id;
+                }
+                setTimeout(function() {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.style.boxShadow = '0 0 0 2px var(--accent)';
+                    setTimeout(function() { target.style.boxShadow = ''; }, 2000);
+                }, 100);
             }
         });
 
@@ -8901,6 +8962,7 @@
             btn.addEventListener('click', function() {
                 const sectionId = this.getAttribute('data-section');
                 showSection(sectionId);
+                window.location.hash = sectionId;
                 window.scrollTo(0, 0);
             });
         });
@@ -8925,19 +8987,31 @@
         });
 
         // Search
-        function handleSearch(event) {
-            const query = event.target.value.toLowerCase();
+        function resetSearch() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('hidden', 'search-highlight');
+                if (card.dataset.searchExpanded) {
+                    card.classList.remove('expanded');
+                    card.setAttribute('aria-expanded', 'false');
+                    delete card.dataset.searchExpanded;
+                }
+            });
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = '';
+            });
+            const noResults = document.getElementById('noResults');
+            if (noResults) noResults.style.display = 'none';
+        }
 
-            // Reset view if query is too short
+        function handleSearch(event) {
+            const query = (event.target ? event.target.value : event).toLowerCase().trim();
+
             if (query.length < 2) {
-                document.querySelectorAll('.card').forEach(card => {
-                    card.classList.remove('hidden', 'search-highlight');
-                });
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.display = '';
-                });
+                resetSearch();
                 return;
             }
+
+            let totalMatches = 0;
 
             // Search through all cards
             const cards = document.querySelectorAll('.card');
@@ -8946,9 +9020,20 @@
                 if (text.includes(query)) {
                     card.classList.remove('hidden');
                     card.classList.add('search-highlight');
+                    totalMatches++;
+                    if (query.length > 3 && card.classList.contains('expandable') && !card.classList.contains('expanded')) {
+                        card.classList.add('expanded');
+                        card.setAttribute('aria-expanded', 'true');
+                        card.dataset.searchExpanded = 'true';
+                    }
                 } else {
                     card.classList.add('hidden');
                     card.classList.remove('search-highlight');
+                    if (card.dataset.searchExpanded) {
+                        card.classList.remove('expanded');
+                        card.setAttribute('aria-expanded', 'false');
+                        delete card.dataset.searchExpanded;
+                    }
                 }
             });
 
@@ -8962,17 +9047,26 @@
                     section.style.display = 'none';
                 }
             });
+
+            // Show no results message
+            let noResults = document.getElementById('noResults');
+            if (!noResults) {
+                noResults = document.createElement('div');
+                noResults.id = 'noResults';
+                noResults.style.cssText = 'text-align:center;padding:60px 20px;color:var(--text-secondary);font-size:1.1rem;';
+                noResults.innerHTML = 'No results found. Try a different search term.';
+                document.querySelector('.main-content').appendChild(noResults);
+            }
+            const anySectionVisible = document.querySelector('.section[style*="display: block"]');
+            noResults.style.display = (totalMatches === 0 && !anySectionVisible) ? 'block' : 'none';
         }
 
-        // Reset search on clear
+        // Handle search input (covers typing, paste, and clear)
         document.getElementById('searchInput').addEventListener('input', function() {
             if (this.value === '') {
-                document.querySelectorAll('.card').forEach(card => {
-                    card.classList.remove('hidden', 'search-highlight');
-                });
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.display = '';
-                });
+                resetSearch();
+            } else {
+                handleSearch(this.value);
             }
         });
 
@@ -9045,6 +9139,12 @@
                 document.getElementById('searchInput').focus();
             }
         });
+
+        // Load correct section from URL hash on page load
+        (function() {
+            const hash = window.location.hash.slice(1);
+            if (hash) showSection(hash);
+        })();
     </script>
 </body>
 </html>
