@@ -853,11 +853,12 @@
 
         .stat-value {
             font-family: 'Fraunces', Georgia, serif;
-            font-size: 2rem;
+            font-size: clamp(1.25rem, 3vw, 2rem);
             font-weight: 800;
             color: var(--text);
             margin-bottom: 6px;
             letter-spacing: -0.03em;
+            white-space: nowrap;
         }
 
         .stat-label {
