@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indie Horror Distribution Guide 2025-2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0c0a09;
@@ -41,7 +41,7 @@
         }
 
         body {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-family: 'Syne', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -249,6 +249,28 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Staggered card reveal */
+        @keyframes cardReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card.stagger-reveal {
+            opacity: 0;
+            animation: cardReveal 0.35s ease-out forwards;
+        }
+
+        .info-box.stagger-reveal,
+        .critical-alert.stagger-reveal {
+            opacity: 0;
+            animation: cardReveal 0.35s ease-out forwards;
+        }
+
+        .stats-row .stat-box.stagger-reveal {
+            opacity: 0;
+            animation: cardReveal 0.3s ease-out forwards;
         }
 
         /* Hero Section */
@@ -9043,6 +9065,15 @@
             });
             section.classList.add('active');
 
+            // Staggered card reveal animation
+            const revealTargets = section.querySelectorAll('.card, .info-box, .critical-alert, .stat-box');
+            revealTargets.forEach((el, i) => {
+                el.classList.remove('stagger-reveal');
+                void el.offsetWidth; // force reflow
+                el.style.animationDelay = (i * 0.04) + 's';
+                el.classList.add('stagger-reveal');
+            });
+
             return true;
         }
 
@@ -9281,10 +9312,22 @@
             }
         });
 
-        // Load correct section from URL hash on page load
+        // Load correct section from URL hash on page load, with stagger
         (function() {
             const hash = window.location.hash.slice(1);
-            if (hash) showSection(hash);
+            if (hash) {
+                showSection(hash);
+            } else {
+                // Trigger stagger on default overview section
+                const overview = document.getElementById('overview');
+                if (overview) {
+                    const revealTargets = overview.querySelectorAll('.card, .info-box, .critical-alert, .stat-box');
+                    revealTargets.forEach((el, i) => {
+                        el.style.animationDelay = (i * 0.04) + 's';
+                        el.classList.add('stagger-reveal');
+                    });
+                }
+            }
         })();
     </script>
 </body>
