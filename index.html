@@ -823,11 +823,11 @@
         .stat-box {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 28px 20px;
+            padding: 28px 12px;
             text-align: center;
             transition: all 0.25s ease;
             position: relative;
-            overflow: hidden;
+            min-width: 0;
         }
 
         .stat-box::before {
@@ -853,12 +853,11 @@
 
         .stat-value {
             font-family: 'Fraunces', Georgia, serif;
-            font-size: clamp(1.25rem, 3vw, 2rem);
+            font-size: clamp(1.1rem, 2.5vw, 2rem);
             font-weight: 800;
             color: var(--text);
             margin-bottom: 6px;
             letter-spacing: -0.03em;
-            white-space: nowrap;
         }
 
         .stat-label {
@@ -1670,7 +1669,7 @@
         <section class="section active" id="overview">
             <div class="section-header section-hero">
                 <h2>Distribution Intelligence</h2>
-                <p>Your comprehensive guide to navigating indie horror distribution in 2025&ndash;2026. The landscape has fundamentally shifted—traditional MGs have evaporated, platforms have consolidated, and profitability now runs through AVOD channels, boutique distributors, and direct-to-audience strategies.</p>
+                <p>Your comprehensive guide to navigating indie horror distribution in 2025&ndash;2026. The landscape has fundamentally shifted&mdash;platforms have consolidated, predatory distributors outnumber legitimate ones, and profitability demands you negotiate an MG, control your marketing, and understand every clause before you sign.</p>
             </div>
 
             <div class="stats-row">
