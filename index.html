@@ -1232,6 +1232,343 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 28px;
+            right: 148px;
+            z-index: 95;
+        }
+
+        .chatbot-bubble {
+            width: 52px;
+            height: 52px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chatbot-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.4);
+        }
+
+        .chatbot-bubble svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 92px;
+            right: 28px;
+            width: 400px;
+            max-height: 520px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-window.open {
+            display: flex;
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: var(--bg);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .chatbot-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+        }
+
+        .chatbot-close:hover {
+            color: var(--accent);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 380px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .chatbot-msg {
+            max-width: 88%;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chatbot-msg.user {
+            align-self: flex-end;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .chatbot-msg.bot {
+            align-self: flex-start;
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+        }
+
+        .chatbot-msg.bot p {
+            margin: 0 0 6px 0;
+        }
+
+        .chatbot-msg.bot ul {
+            margin: 4px 0 8px 0;
+            padding-left: 18px;
+        }
+
+        .chatbot-msg.bot li {
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+            gap: 8px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-input:focus {
+            border-color: var(--accent);
+        }
+
+        .chatbot-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chatbot-send {
+            padding: 8px 14px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .chatbot-send:hover {
+            background: var(--accent-hover);
+        }
+
+        .chatbot-send svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .chatbot-result {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: var(--surface);
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-result:hover {
+            border-color: var(--accent);
+        }
+
+        .chatbot-result-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .chatbot-result-title {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .chatbot-result-badge {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: var(--accent);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .chatbot-result-summary {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 0 0 6px 0;
+            line-height: 1.4;
+        }
+
+        .chatbot-result-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .chatbot-result-tag {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: var(--bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .chatbot-result-link {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .chatbot-result-link:hover {
+            text-decoration: underline;
+        }
+
+        .chatbot-typing {
+            display: flex;
+            gap: 4px;
+            padding: 10px 14px;
+            align-self: flex-start;
+        }
+
+        .chatbot-typing span {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: chatbotBounce 1.2s infinite;
+        }
+
+        .chatbot-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chatbot-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes chatbotBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+
+        .chatbot-quick-searches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .chatbot-quick-btn {
+            padding: 5px 10px;
+            font-size: 0.72rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .chatbot-quick-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .chatbot-suggestions {
+            padding-left: 18px;
+            margin: 6px 0;
+        }
+
+        .chatbot-suggestions li {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .chatbot-container {
+                bottom: 20px;
+                right: 132px;
+            }
+            .chatbot-bubble {
+                width: 44px;
+                height: 44px;
+            }
+            .chatbot-bubble svg {
+                width: 20px;
+                height: 20px;
+            }
+            .chatbot-window {
+                right: 8px;
+                left: 8px;
+                width: auto;
+                bottom: 76px;
+                max-height: 65vh;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .chatbot-window {
+                bottom: 0;
+                right: 0;
+                left: 0;
+                max-height: 70vh;
+            }
+        }
+
+        @media print {
+            .chatbot-container { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -3362,7 +3699,129 @@
                             <p><strong>Bottom Line:</strong> Shoreline is not a "scam" in the criminal sense—they attend markets, place films on platforms, and don't charge upfront fees. But their business model is structurally hostile to individual filmmaker outcomes: 15-year sub-license traps, Mainsail LLC liability shield, zero individual advocacy for films lost in a 10,000-title catalog, documented federal copyright infringement allegations, and a founder who moved his creative work to a different company. Your film becomes content to feed AVOD algorithms—not a title anyone champions. If you have ANY other option, take it.</p>
                         </div>
                     </div>
+
+                    <div class="card expandable" id="card-horror-collective" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Horror Collective / Entertainment Squad</h3>
+                            <span class="card-badge badge-avoid">CAUTION</span>
+                        </div>
+                        <div class="card-content">
+                            Genre-focused distributor with management concerns
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Genre Arm of Entertainment Squad</span>
+                            <span class="meta-tag">Bloodstream Streaming Service</span>
+                            <span class="meta-tag">Contractual Disputes</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>Genre Arm:</strong> Genre arm of Entertainment Squad; positions itself as a premiere distribution home for indie horror.</p>
+                            <p><strong>Lackluster Launch:</strong> Debut film (Greenlight) was a "lackluster debut" that left the company scrambling — raises questions about execution ability.</p>
+                            <p><strong>Bloodstream Streaming Service:</strong> Launched "Bloodstream" streaming service in 2025, positioning as a Shudder challenger — but filmmakers remain wary of management cliques and clunky execution.</p>
+                            <p><strong>Contractual Growing Pains:</strong> History of contractual disputes on first films suggests growing pains.</p>
+                            <p><strong>Cautious Outlook:</strong> The brand may improve, but current track record warrants caution before signing exclusive deals.</p>
+                            <p><strong>Red Flag:</strong> New streaming platforms burn through content budgets quickly — get payment terms in writing before your film becomes catalog filler on a service that may not survive 12 months.</p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Kew Media Group / Kew Media Distribution</h3>
+                            <span class="card-badge badge-avoid">COLLAPSED</span>
+                        </div>
+                        <div class="card-content">
+                            Canadian company that collapsed February 2020. Owed ~&pound;10.8M ($13.3M) in unpaid royalties to ~250 clients.
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Bankruptcy</span>
+                            <span class="meta-tag">Unpaid Royalties</span>
+                            <span class="meta-tag">Canada</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>Receivership:</strong> Went into receivership under Ontario Superior Court in February 2020.</p>
+                            <p><strong>Recovery Outlook:</strong> Administrator FTI Consulting stated producers were unlikely to recover money "in any meaningful way."</p>
+                            <p><strong>Library Acquired:</strong> Library of ~1,000 titles acquired by Quiver Entertainment in May 2020.</p>
+                            <p><strong>For Filmmakers:</strong> This is a "total loss" scenario — your unpaid royalties become unsecured claims in bankruptcy, meaning you're last in line behind secured creditors.</p>
+                            <p><em>Source: Deadline, Variety</em></p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Village Roadshow Entertainment Group</h3>
+                            <span class="card-badge badge-avoid">COLLAPSED</span>
+                        </div>
+                        <div class="card-content">
+                            Filed Chapter 11 bankruptcy March 17, 2025. $500M-$1B in liabilities. WGA issued stop-work order for unpaid writers.
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Bankruptcy</span>
+                            <span class="meta-tag">Chapter 11</span>
+                            <span class="meta-tag">2025</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>Filing:</strong> Filed Chapter 11 in Delaware, March 2025.</p>
+                            <p><strong>Liabilities:</strong> $500M-$1B in liabilities vs $100M-$500M in assets.</p>
+                            <p><strong>WGA Action:</strong> WGA West issued stop-work order in late 2024 due to unpaid writers.</p>
+                            <p><strong>Workforce:</strong> Workforce cut from 45 to 11 employees.</p>
+                            <p><strong>Industry Context:</strong> While primarily a studio-level company (The Matrix, Joker), its collapse illustrates ongoing fragility of mid-tier distribution infrastructure.</p>
+                            <p><em>Source: Variety, Deadline, Bloomberg</em></p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Media 8 Entertainment</h3>
+                            <span class="card-badge badge-avoid">COLLAPSED</span>
+                        </div>
+                        <div class="card-content">
+                            Filed Chapter 11 with $8.6M in debt owed to stars including Charlize Theron, Ben Affleck, and Christina Ricci.
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">Bankruptcy</span>
+                            <span class="meta-tag">Celebrity Lawsuits</span>
+                            <span class="meta-tag">Shell Operation</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>Operations:</strong> Was operating from "a room, mailbox, and garage space" at the CEO's sister's residence.</p>
+                            <p><strong>Lawsuits:</strong> Multiple lawsuits including $5.4M judgment from 757 Film Acquisition LLC.</p>
+                            <p><strong>For Filmmakers:</strong> If they couldn't pay A-list stars, independent filmmakers had zero chance of seeing revenue.</p>
+                            <p><em>Source: American Bankruptcy Institute</em></p>
+                        </div>
+                    </div>
+
+                    <div class="card expandable" onclick="toggleExpand(this)">
+                        <div class="card-header">
+                            <h3>Blue Harbor Entertainment</h3>
+                            <span class="card-badge badge-caution">WATCH</span>
+                        </div>
+                        <div class="card-content">
+                            Founded October 2023 by former Screen Media/CSSE employees. Unproven track record from founders of a collapsed company.
+                        </div>
+                        <div class="card-meta">
+                            <span class="meta-tag">CSSE Alumni</span>
+                            <span class="meta-tag">New Entity</span>
+                            <span class="meta-tag">Unproven</span>
+                        </div>
+                        <div class="expand-trigger">More details</div>
+                        <div class="expand-content">
+                            <p><strong>Founders:</strong> Founded by Amanda Sherwin, Mike Messina, and Seth Needle — all former Screen Media/CSSE employees.</p>
+                            <p><strong>CSSE Context:</strong> CSSE (Chicken Soup for the Soul Entertainment) filed Chapter 7 bankruptcy with $970M in debt.</p>
+                            <p><strong>Industry Warnings:</strong> Multiple filmmakers in industry forums have warned against Blue Harbor based on founders' track record.</p>
+                            <p><strong>Community Sentiment:</strong> One commenter in Deadline coverage: "I have been told twice to stay away from this new company... The nerve these people have."</p>
+                            <p><strong>Bottom Line:</strong> This is a "watch with extreme caution" listing — the company is new, but its DNA comes from a catastrophically failed operation.</p>
+                            <p><em>Source: Variety (Oct 2023); Deadline comments</em></p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="info-box warning" style="margin-top: 24px;">
+                <h4>&#9888;&#65039; The Stealth Media / Michael Cowan Warning</h4>
+                <p>Phoenix Worldwide Entertainment (UK), operating through Stealth Media Group, is associated with principal Michael Cowan, accused of refusing to pay a $100,000 minimum guarantee to filmmaker Michael Daniel for the film "Get Gone." Daniel, who had stage 4 cancer, sold his truck ($15K) to cover deliverables. The distributor was reportedly "literally waiting for him to die" to avoid payment. Cowan has separate press coverage regarding using celebrity names (Mel Gibson, George Clooney, Matt Damon, John Travolta) without authorization to raise production funds. <em>Source: Indie Film Hustle Episode 413; Mirror UK.</em></p>
             </div>
         </section>
 
@@ -3945,6 +4404,16 @@
                     <li><strong>Scenario 2:</strong> Volume distributor takes 50% → Filmhub takes 20% of remainder = <strong>60%+ gone</strong></li>
                 </ul>
                 <p style="margin-top: 8px;"><strong>Always ask:</strong> "Do you deliver directly to platforms, or do you use an aggregator?" If they use an aggregator, understand the full fee chain between you and the platform. You may be better off using the aggregator yourself and cutting out the middleman entirely.</p>
+            </div>
+
+            <div class="info-box warning" style="margin-top: 16px;">
+                <h4>⚠️ Content Scraping Risk</h4>
+                <p>In 2024-2025, a third-party YouTube channel called "Stash TV" was found scraping and re-uploading filmmaker content from aggregator catalogs. Filmhub allegedly failed to provide adequate damage control or protection for affected creators. This highlights a critical blind spot: when you upload to an aggregator, your content may end up on unauthorized channels with no recourse. Always monitor your title on YouTube and file DMCA takedowns independently — don't rely on your aggregator to police unauthorized use.</p>
+            </div>
+
+            <div class="info-box warning" style="margin-top: 16px;">
+                <h4>⚠️ QC Rejection Fees — The Hidden Cost</h4>
+                <p>Platforms like Tubi have strict technical requirements — any audio with echo or uneven color grading in the first 15 minutes can trigger auto-rejection. Aggregators often charge a "Professional Service" fee of $300-$500 to fix rejected files, turning a technical barrier into a secondary revenue stream. Budget for professional QC before submission: it's cheaper to fix issues yourself ($100-$200 with a freelance colorist/sound mixer) than to pay aggregator markup.</p>
             </div>
         </section>
 
@@ -6696,6 +7165,11 @@
                 <p>Maryland offers a 28% refundable tax credit with a "Small Film" designation requiring only <strong>$25,000 minimum spend</strong>—making it the most accessible US incentive for micro-budget horror. The production entity must be organized in Maryland for at least 3 months prior, be independently owned, and employ 25 or fewer full-time employees. On a $70,000 budget with $60,000 qualifying Maryland spend, this returns <strong>$16,800 in cash</strong>. FY 2026 has ~$1.2M allocated for small films on a first-come, first-served basis.</p>
             </div>
 
+            <div class="info-box warning" style="margin-top: 24px;">
+                <h4>⚠️ Florida Tourist Tax — Not for Micro-Budget</h4>
+                <p>The Orange County, Florida film incentive program (funded by the Tourist Development Tax) looks appealing with its $25 million fund — but the minimum qualified spend is <strong>$400,000</strong>, nearly six times a typical micro-budget horror film. Don't plan your financing around this incentive unless you're operating at the mid-budget tier ($500K+). The same applies to most state incentives with high minimums — Georgia's 30% credit requires <strong>$500,000 minimum spend</strong>.</p>
+            </div>
+
             <div class="prose" style="margin-top: 24px;">
                 <h3>Tax Credit Lending</h3>
                 <p>State tax incentives remain a vital capital stack component. Lenders advance cash against projected incentives, typically advancing 80-90% of the estimated credit value. But fees and interest reduce the net benefit. See the <strong>International Tax Incentives</strong> section for state/country-specific programs. NCSL maintains an overview of all state film and TV incentive programs at ncsl.org.</p>
@@ -8978,6 +9452,356 @@
                 <h4>The Opportunity Cost of Scam Festivals</h4>
                 <p>A filmmaker who spends $2,000 on a circuit of monthly laurel mills must generate approximately <strong>20,000 viewer hours on Tubi</strong> just to recoup entry fees. Scam laurels carry zero weight with acquisitions managers at A24, Shudder, or IFC Midnight—the investment is a 100% loss. That $2,000 is better spent on DCP creation ($900-$1,350), professional captioning ($179), or social media marketing that drives actual platform views.</p>
             </div>
+
+            <h3 style="font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; margin: 40px 0 20px;">Named Predatory Festival Database (2024-2026)</h3>
+            <p style="margin: 0 0 20px; color: var(--text-secondary); font-size: 0.95rem;">The following database catalogs over 100 specific festival operations identified as predatory, dubious, or fraudulent. Sources include the submittingtofilmfestivals.com Dubious Film Festival List (December 2024 PDF), Hollywood Reporter investigations, filmmaker testimony, and industry publications. Check every festival against this list before submitting.</p>
+
+            <div class="card-grid">
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Cannes Name Exploiters</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Six operations piggybacking the Festival de Cannes brand. None have any affiliation.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Fee Harvesting</span>
+                        <span class="meta-tag">Name Mimicry</span>
+                        <span class="meta-tag">Geographic Ghost</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Cannes Independent Film Festival (CIFF)</strong> &mdash; Laurel mill run from the UK with zero Cannes presence. Falsely claimed connection to the March&eacute; du Film. Sent legal threats to exposure websites. Source: cannesguide.com, filmmaking.net.</li>
+                            <li><strong>Cannes Film Awards</strong> &mdash; Laurel mill. Listed on submittingtofilmfestivals.com Dubious List (Dec 2024).</li>
+                            <li><strong>Cannes World Film Festival</strong> &mdash; Geographic ghost. Malaysian media confused one nominee with a real Cannes selection. Source: The Vibes.</li>
+                            <li><strong>Cannes International Cinema Festival</strong> &mdash; Listed on submittingtofilmfestivals.com Dubious List (Dec 2024).</li>
+                            <li><strong>Cannes Script Awards</strong> &mdash; Awards mill using the Cannes brand.</li>
+                            <li><strong>Cannes Arts Fest</strong> &mdash; Named by WorkCabin Films as deceptive piggyback festival.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Venice &amp; Rome Name Exploiters</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Five operations exploiting Venice and Rome festival prestige.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Name Mimicry</span>
+                        <span class="meta-tag">Awards Mill</span>
+                        <span class="meta-tag">Pay-for-Trophy</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Venice Under the Stars</strong> &mdash; No administrators, no jury, no physical ceremony.</li>
+                            <li><strong>Venice Grand Cine Celebration</strong> &mdash; Removed from FilmFreeway. Cloned with Magic Silver Screen; now on WFCN.</li>
+                            <li><strong>Rome International Movie Awards</strong> &mdash; Monthly online-only "festival" partnered with Hollywood Blood Horror and Madrid International Movie Awards. No screenings.</li>
+                            <li><strong>Rome Movie Awards</strong> &mdash; Awards mill.</li>
+                            <li><strong>Reale Film Festival (Italy)</strong> &mdash; No event occurs. Winners can purchase trophy for &euro;250.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Berlin &amp; Toronto Mimics</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Operations piggybacking TIFF and Berlinale brands.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Name Mimicry</span>
+                        <span class="meta-tag">Brand Exploitation</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Berlin New Wave Film Festival</strong> &mdash; Listed as dubious, Germany/Australia operation.</li>
+                            <li><strong>Toronto Independent Festival of CIFT</strong> &mdash; Piggybacking the TIFF brand.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>The Mauceri Laurel Mill Network</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Three interconnected monthly award operations run by Massimiliano Mauceri. Submission fees exceed $100; gilded statues sold for &euro;300.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Laurel Mill</span>
+                        <span class="meta-tag">Network Operator</span>
+                        <span class="meta-tag">Fee Harvesting</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>New York Movie Awards</strong> &mdash; Run by Mauceri. Features never screened&mdash;monthly showcases are shorts-only. Over 700 FilmFreeway reviews with zero negative comments (suggesting suppression). Source: Substack (lakeivan.substack.com).</li>
+                            <li><strong>London Movie Awards</strong> &mdash; Same operator, identical model.</li>
+                            <li><strong>Florence Film Awards</strong> &mdash; Third in the Mauceri chain.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>The Horror Genre Awards Network</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        A network of interconnected monthly online "festivals" with horror-branded names. Zero physical screenings. Based in Spain/Italy.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Monthly Mill</span>
+                        <span class="meta-tag">Trophy Sales</span>
+                        <span class="meta-tag">Horror-Branded</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Hollywood Blood Horror Festival</strong> &mdash; Monthly awards operation based in Spain/Italy. Winners on the 5th of each month. Sells a "Golden Hand" marble-dust trophy.</li>
+                            <li><strong>Madrid International Movie Awards</strong> &mdash; Monthly with 20+ categories. Part of same network.</li>
+                            <li><strong>Miami International Gold Awards</strong> &mdash; Bimonthly. "Films entered in multiple categories may win multiple awards!" Winners purchase trophies by resubmitting in a "TROPHY" category.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Additional Laurel Mills &amp; Awards Operations</h3>
+                        <span class="card-badge badge-avoid">AVOID</span>
+                    </div>
+                    <div class="card-content">
+                        Individual laurel mills and awards operations documented on the submittingtofilmfestivals.com Dubious List.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Laurel Mill</span>
+                        <span class="meta-tag">Awards Mill</span>
+                        <span class="meta-tag">Fee Harvesting</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li>Festigious, Top Shorts Awards, Accolade Awards Competition, Gold Star Movie Awards (USA/India), Actors Awards, Milan Gold Awards, Milano Indie Movie Award, Pinnacle Film Awards, Best Indie Film Award, Cinematography &amp; Photography Awards (CAPA), European Short Awards, FCA (Filmmakers Connect Awards)</li>
+                            <li><strong>Removed from FilmFreeway but may resurface:</strong> 8 &amp; Halfilm Awards, Golden Art Film Academy, Golden Laurel International Festival, International World Film Awards, Kings Awards, Kings Cross Awards, Top Film Awards, Best Short Film Award</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Geographic Ghost Festivals</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Festivals named after prestigious cities with no meaningful physical presence. Pure fee extraction operations.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Geographic Ghost</span>
+                        <span class="meta-tag">No Physical Events</span>
+                        <span class="meta-tag">City Name Exploitation</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li>Boston Independent Film Awards</li>
+                            <li>Chicago Indie Film Awards</li>
+                            <li>Chicago Script Awards</li>
+                            <li>LA Film Awards (lafilmawards.net)</li>
+                            <li>Nashville Independent Filmmakers Festival</li>
+                            <li>New York Film Awards</li>
+                            <li>New York Independent Cinema Awards</li>
+                            <li>New York Cinema Awards</li>
+                            <li>Paris Film Awards (operated from Italy/Morocco)</li>
+                            <li>Washington Film Awards (removed from FilmFreeway)</li>
+                            <li>World Cinema Paris (UK-operated)</li>
+                            <li>Prague Music Awards</li>
+                            <li>Prague Screenplay Awards</li>
+                            <li>California Film Awards (suspected La Jolla Film Festival scam connection)</li>
+                            <li>New Orleans Cinema Awards</li>
+                            <li>Buenos Aires Indie Film Festival</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>The &ldquo;Around Films&rdquo; Chain</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        A single operation running identical &ldquo;festivals&rdquo; across multiple European cities to multiply submission revenue.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Chain Operation</span>
+                        <span class="meta-tag">Multi-City Scam</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Around Film Festival Amsterdam</strong> &mdash; Part of chain (aroundfilms.com)</li>
+                            <li><strong>Around Film Festival Barcelona (ARFF Barcelona)</strong> &mdash; Same chain</li>
+                            <li><strong>Around Film Festival Paris</strong> &mdash; Same chain</li>
+                            <li><strong>Source:</strong> submittingtofilmfestivals.com</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>The Binda Singh Network</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Chain of bogus international festivals connected to operator Binda Singh. Tiny 20-seat venues, no publicity, no programs, no real audiences. Films &ldquo;accepted&rdquo; to multiple festivals simultaneously.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Chain Operator</span>
+                        <span class="meta-tag">Fake Venues</span>
+                        <span class="meta-tag">Multi-Festival Scam</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li>Swansea Bay Film Festival (hub), International Film Festival Egypt, International GAY Film Festival UK, International Film Festival of Australasia, International Film Festival Thailand Kanchanaburi, International Film Festival of West Wales, International Film Festival Italy Rome, International Film Festival of Digital Arts UK, India International Film Festival Goa (not the legitimate IFFI), International Film Festival London, Heart of North America International Film &amp; Video Festival</li>
+                            <li><strong>Source:</strong> Creative COW forums</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Complete Scam Festivals &mdash; Never Held Events</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Festivals that collected submission fees but never held any physical screening events.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Total Fraud</span>
+                        <span class="meta-tag">No Events</span>
+                        <span class="meta-tag">Fee Theft</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Eurocinema Film Festival</strong> &mdash; Filmmaker Cindy Marinangel flew NYC to London for October 2018 screening at Royal Holloway University. University knew nothing. Organizer David Schmid went silent. Charged $15-$105 across 10 deadline tiers. FilmFreeway delisted it. Source: Hollywood Reporter (2019).</li>
+                            <li><strong>BIGSND Film Festival</strong> &mdash; Banned from FilmFreeway and Withoutabox. Falsely used National Veterans Foundation logo. Claimed LA Live as venue but never on their calendar. Charged $120/submission. Source: filmmaking.net.</li>
+                            <li><strong>Annual Program Without Frontiers (APWF)</strong> &mdash; Front organization running fake &ldquo;Chicago Short Film Festival.&rdquo; Collected $20/submission. No screenings or judging. Emailed &ldquo;diplomas&rdquo; as cover. Source: Mad Dog Movies blog.</li>
+                            <li><strong>New York Film &amp; Female Actress Award</strong> &mdash; Filmmaker submitted July 2025; notification deadline passed with zero response. Source: Trustpilot.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Italy-Based Dubious Operations (Cinebaloss / Paolo Casarolli)</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        Cluster of Italian-operated dubious festivals, several linked to operator Paolo Casarolli / Cinebaloss.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Italy Network</span>
+                        <span class="meta-tag">Cloned Operations</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li>Night of Comedy Drama</li>
+                            <li>Night of Comedy Shorts</li>
+                            <li>Monza Film Fest</li>
+                            <li>Magic Silver Screen (cloned with Venice Grand Cine Celebration)</li>
+                            <li>SENSI FILMFEST</li>
+                            <li>Casino Film Festival (runs 4 festivals under Casino umbrella)</li>
+                            <li>CLIMAX Film Festival</li>
+                            <li>Cineparis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>India-Based Dubious Festivals</h3>
+                        <span class="card-badge badge-danger">SCAM</span>
+                    </div>
+                    <div class="card-content">
+                        India has the highest concentration of dubious festival operations per submittingtofilmfestivals.com. Common patterns: monthly editions, dozens of categories, paid trophy/certificate programs, and exploitation of the &ldquo;Dadasaheb Phalke&rdquo; award name.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">India Network</span>
+                        <span class="meta-tag">Monthly Mill</span>
+                        <span class="meta-tag">Fake Awards</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>Indian Independent Film Festival</strong> &mdash; Monthly editions, paid &ldquo;special interviews&rdquo;</li>
+                            <li><strong>Filmfare India IFF (FIFF/FIIFF)</strong> &mdash; Monthly certificates. Claims anyone can &ldquo;become a Dada Saheb Phalke Awardee&rdquo; (the real award is India&rsquo;s highest government film honor)</li>
+                            <li><strong>Indian Panorama IFF (IPIFF)</strong> &mdash; Linked to FIFF network. Threatens to disqualify films if anyone other than the submitter contacts the festival</li>
+                            <li><strong>Global Independent Film Festival of India (GIFFI)</strong> &mdash; Multiple monthly editions</li>
+                            <li><strong>Also dubious:</strong> Angel Fish IFF, Cine Sepia Reels Carnival (&ldquo;Indian community shopping mall event&rdquo;), Creative Creeds IFF, Dreamz Catcher IFF (same operators as Krimson Horyzon), Krimson Horyzon IFF, Golden Lion IFF (GLIFF), Indie Cine Tube Awards (ICTA), Lens Fame IFF, Lightbox IFF (listed as France, operated from India), Movie Play IFF, Parambi Productions IFF, The Pinx Film Festival</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>Other Documented Dubious Festivals</h3>
+                        <span class="card-badge badge-avoid">AVOID</span>
+                    </div>
+                    <div class="card-content">
+                        Additional festivals flagged across multiple regions from multiple investigative sources.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Multi-Region</span>
+                        <span class="meta-tag">Documented Complaints</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <ul>
+                            <li><strong>WorldFest-Houston</strong> &mdash; Awards 600+ films annually (nearly everyone &ldquo;wins&rdquo;). Past judge admitted never seeing films. Sells duplicate Remi Awards. Source: filmmaking.net.</li>
+                            <li><strong>New York International Independent Film &amp; Video Festival</strong> &mdash; Urged filmmakers to provide credit card details within 24 hours for $300 fees. Source: Mad Dog Movies blog.</li>
+                            <li><strong>Lift Off Network</strong> &mdash; &ldquo;No value in the product.&rdquo; Source: submittingtofilmfestivals.com.</li>
+                            <li><strong>ECRA</strong> &mdash; Advertised as in-person but showed work online-only. Source: Trustpilot.</li>
+                            <li><strong>Silicon Valley IFF</strong> &mdash; Organized by the production company of submitted films. Source: shortfilm.de.</li>
+                            <li><strong>Marina Del Rey IFF</strong> &mdash; One of several by Film Marketing Services Inc. Source: shortfilm.de.</li>
+                            <li><strong>Also flagged:</strong> Athens IMAFF, AZADI Film Festival, Cowpokes IFF, European Independent Filmmaker Festival &amp; Awards, Filmtage der Nationen (Germany), Five Continents IFF (Bolivia), French International Modern, Global Film Exhibition, Golden Bridge Istanbul Short Film Festival, International Short &amp; Symbolic Art Film Festival, New Cinema Festival, Polish IFF, Purple Sky, Sofia IFF (the dubious one), South Film &amp; Arts Academy Festival (Chile), Villa de Rota Writing Film Festival, Your Way IFF (Malta)</li>
+                            <li><strong>Removed from FilmFreeway:</strong> Hong Kong International Film Carnival, IFM International Film Market, Indiefare IFF, Liber Films IF, New Wave London, Portuguese Film Festival, Winter Leopard IFF, Bay Film Festival</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card expandable" onclick="toggleExpand(this)">
+                    <div class="card-header">
+                        <h3>The FilmFreeway Hacking Scam (2024)</h3>
+                        <span class="card-badge badge-danger">CRITICAL</span>
+                    </div>
+                    <div class="card-content">
+                        In 2024, hackers compromised FilmFreeway accounts to impersonate legitimate festivals, stealing filmmaker contact info and film titles.
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-tag">Cybersecurity</span>
+                        <span class="meta-tag">Account Compromise</span>
+                        <span class="meta-tag">2024</span>
+                    </div>
+                    <div class="expand-trigger">Details</div>
+                    <div class="expand-content">
+                        <p>Hackers from California and Singapore compromised FilmFreeway accounts to impersonate legitimate festivals. They gained unauthorized access to filmmakers&rsquo; contact information and film titles, created copycat festival websites, and sent fraudulent selection emails. Multiple prestigious festivals were impacted. Always verify selection emails directly through a festival&rsquo;s official website&mdash;never click links in unexpected &ldquo;congratulations&rdquo; emails. Source: Medium (Gena Vazquez, &ldquo;California Dreaming&rdquo;).</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- RED FLAGS -->
@@ -9128,6 +9952,17 @@
                 </ul>
                 <a href="https://thefilmcollaborative.org/distripedia/distributorreportcard/" target="_blank" class="action-link">📋 Check Report Card</a>
                 <a href="https://vlany.org/" target="_blank" class="action-link" style="margin-left: 8px;">⚖️ Get Legal Help</a>
+            </div>
+
+            <div class="info-box success" style="margin-top: 32px;">
+                <h4>✅ Essential Due Diligence Resources</h4>
+                <ul>
+                    <li><strong>submittingtofilmfestivals.com Dubious List</strong> — Regularly updated database of 100+ flagged festivals. Check every festival before submitting. Free PDF download.</li>
+                    <li><strong>The Film Collaborative's Distributor ReportCard</strong> — Anonymous filmmaker surveys about distributor experiences. The closest thing to a "Yelp for distributors."</li>
+                    <li><strong>Indie Film Hustle podcast</strong> — Episodes 352, 373-374, 377, 397, and 413 contain detailed exposés of specific predatory distributor tactics.</li>
+                    <li><strong>Facebook group: "Protect Yourself from Predatory Film Distributors/Aggregators"</strong> — Real-time community intelligence from filmmakers sharing experiences.</li>
+                    <li><strong>FilmFreeway delisting is NOT sufficient protection</strong> — Only 42 festivals have been delisted despite thousands of complaints. Many dubious operations relaunch under new names.</li>
+                </ul>
             </div>
         </section>
 
@@ -9329,6 +10164,16 @@
                 <p>Market data from 2025-2026 indicates near-total cessation of MGs for independent films lacking A-list talent or top-tier festival pedigree. The stance "if no MG, don't sign" is a protective heuristic that aligns with the reality that No-MG deals often result in zero revenue due to cross-collateralization and uncapped expenses.</p>
                 <p style="background: var(--danger-muted); padding: 12px 16px; border-left: 3px solid var(--danger); margin: 16px 0;"><strong>STATISTICAL WARNING:</strong> Research suggests that 95% of distribution agreements signed in 2024-2026 without an MG resulted in less than $1,000 net revenue to the filmmaker after 24 months. When a traditional distributor offers "No MG," they are asking you to bear 100% of the risk while they bear 0%.</p>
             </div>
+
+            <div class="info-box danger" style="margin-top: 32px;">
+                <h4>🚨 Four Systemic Predatory Distribution Patterns</h4>
+                <ol>
+                    <li><strong>The Netflix Guarantee</strong> — Pop-up aggregators promise guaranteed placement on Netflix, Hulu, or Tubi with no ability to deliver. Their real revenue comes from encoding, QC, and closed-captioning fees charged upfront ($2,000-$5,000). If anyone guarantees Netflix placement, they are lying. <em>Source: IFH Episode 397.</em></li>
+                    <li><strong>The Minimum Guarantee Trap</strong> — Distributor offers an attractive MG but structures the deal so inflated expenses (marketing, QC, E&amp;O insurance, travel) consume the entire amount before the filmmaker sees a dollar. The MG looks like income but functions as a loan you never benefit from. <em>Source: IFH Episode 377.</em></li>
+                    <li><strong>Asset Purchase Without Liabilities</strong> — When a distributor collapses, a successor company buys the film catalog but explicitly refuses the debts owed to filmmakers. This is exactly what happened when BayView purchased Passion River's assets in 2023 but told filmmakers their unpaid balances were "not our liabilities." Your unpaid royalties die with the old company. <em>Source: The Film Collaborative (Oct 2023).</em></li>
+                    <li><strong>The Streaming Mirage</strong> — The perception of infinite shelf space leading to infinite revenue has collapsed. In reality, 5 million minutes of viewing on Tubi generates approximately $4,000. The "digital penny" economy means millions of small transactions must be protected from fee-stacking, or they yield zero.</li>
+                </ol>
+            </div>
         </section>
 
         <!-- SELF-DISTRIBUTION DECISION -->
@@ -9477,6 +10322,61 @@
                         <p style="color: var(--text-secondary); font-size: 0.85rem;">Assumes existing social media following of 15K. Filmmaker handles all marketing personally.</p>
                     </div>
                 </div>
+            </div>
+
+            <h3 style="font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; margin: 40px 0 20px;">Aggregator vs. Mid-Tier Distributor: $50K Revenue Scenario</h3>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Financial Metric</th>
+                            <th>Tech-Aggregator (Filmhub/Indie Rights)</th>
+                            <th>Mid-Tier Distributor (Gravitas/Uncork'd)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gross Revenue</strong></td>
+                            <td>$50,000</td>
+                            <td>$50,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distribution Fee</strong></td>
+                            <td>$10,000 (20%)</td>
+                            <td>$15,000 (30%)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recoupable Expenses</strong></td>
+                            <td>$0</td>
+                            <td>$35,000 (Capped)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Producer Share</strong></td>
+                            <td style="color: var(--trust);"><strong>$40,000</strong></td>
+                            <td style="color: var(--danger);"><strong>$0</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production Budget</strong></td>
+                            <td>$70,000</td>
+                            <td>$70,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Loss / Profit</strong></td>
+                            <td style="color: var(--caution);"><strong>($30,000)</strong></td>
+                            <td style="color: var(--danger);"><strong>($70,000)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Budget Recoupment</strong></td>
+                            <td style="color: var(--trust);"><strong>57%</strong></td>
+                            <td style="color: var(--danger);"><strong>0%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control of Assets</strong></td>
+                            <td style="color: var(--trust);">Producer maintains all rights</td>
+                            <td style="color: var(--danger);">5-15 year exclusive license</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="info-box success" style="margin-top: 24px;">
@@ -10164,6 +11064,38 @@
         </footer>
     </main>
 
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <button class="chatbot-bubble" id="chatbotBubble" aria-label="Open search assistant" title="Ask the guide">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span class="chatbot-title">Distribution Guide Assistant</span>
+                <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-msg bot">
+                    <p>I can help you find information from this distribution guide. Try asking:</p>
+                    <div class="chatbot-quick-searches">
+                        <button class="chatbot-quick-btn" data-query="which distributors should I avoid">Distributors to avoid</button>
+                        <button class="chatbot-quick-btn" data-query="how does CAMA work">How does CAMA work?</button>
+                        <button class="chatbot-quick-btn" data-query="Filmhub pricing and fees">Filmhub pricing</button>
+                        <button class="chatbot-quick-btn" data-query="contract red flags">Contract red flags</button>
+                        <button class="chatbot-quick-btn" data-query="self distribution revenue">Self-distribution revenue</button>
+                        <button class="chatbot-quick-btn" data-query="predatory festival scams">Festival scams</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask about distributors, contracts, festivals..." autocomplete="off">
+                <button class="chatbot-send" id="chatbotSend" aria-label="Send">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navigation helper function
         function showSection(sectionId) {
@@ -10453,6 +11385,399 @@
                         el.classList.add('stagger-reveal');
                     });
                 }
+            }
+        })();
+
+        // ==========================================
+        // CHATBOT - Smart Search Assistant
+        // ==========================================
+
+        (function() {
+            const chatbotIndex = [];
+
+            function buildChatbotIndex() {
+                document.querySelectorAll('.section').forEach(section => {
+                    const sectionId = section.id;
+                    const sectionH2 = section.querySelector('.section-header h2');
+                    const sectionName = sectionH2 ? sectionH2.textContent.trim() : sectionId;
+                    const sectionDesc = section.querySelector('.section-header p');
+
+                    // Index section header
+                    if (sectionH2) {
+                        chatbotIndex.push({
+                            type: 'section-header',
+                            title: sectionName,
+                            badge: '',
+                            tags: [],
+                            summary: sectionDesc ? sectionDesc.textContent.trim().substring(0, 300) : '',
+                            fullText: (sectionName + ' ' + (sectionDesc ? sectionDesc.textContent : '')).toLowerCase(),
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: sectionId,
+                            element: section
+                        });
+                    }
+
+                    // Index cards
+                    section.querySelectorAll('.card').forEach(card => {
+                        const h3 = card.querySelector('.card-header h3, h3');
+                        const badge = card.querySelector('.card-badge');
+                        const content = card.querySelector('.card-content');
+                        const expand = card.querySelector('.expand-content');
+                        const metaTags = card.querySelectorAll('.meta-tag');
+
+                        const title = h3 ? h3.textContent.trim() : '';
+                        const badgeText = badge ? badge.textContent.trim() : '';
+                        const tags = Array.from(metaTags).map(t => t.textContent.trim());
+                        const summary = content ? content.textContent.trim().substring(0, 300) : '';
+                        const expandText = expand ? expand.textContent.trim() : '';
+                        const fullText = [title, badgeText, tags.join(' '), summary, expandText].join(' ').toLowerCase();
+
+                        chatbotIndex.push({
+                            type: 'card',
+                            title: title,
+                            badge: badgeText,
+                            tags: tags,
+                            summary: summary,
+                            fullText: fullText,
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: card.id || '',
+                            element: card
+                        });
+                    });
+
+                    // Index info boxes
+                    section.querySelectorAll('.info-box, .critical-alert').forEach(box => {
+                        const h4 = box.querySelector('h4');
+                        const texts = Array.from(box.querySelectorAll('p, li')).map(el => el.textContent.trim());
+                        const title = h4 ? h4.textContent.trim() : '';
+                        const bodyText = texts.join(' ');
+
+                        chatbotIndex.push({
+                            type: 'info-box',
+                            title: title,
+                            badge: box.classList.contains('danger') ? 'WARNING' : box.classList.contains('success') ? 'TIP' : '',
+                            tags: [],
+                            summary: bodyText.substring(0, 300),
+                            fullText: (title + ' ' + bodyText).toLowerCase(),
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: box.id || '',
+                            element: box
+                        });
+                    });
+
+                    // Index tables
+                    section.querySelectorAll('.comparison-table').forEach(table => {
+                        const wrapper = table.closest('.table-wrapper');
+                        const prevH3 = wrapper ? wrapper.previousElementSibling : null;
+                        const title = (prevH3 && prevH3.tagName === 'H3') ? prevH3.textContent.trim() : sectionName + ' Table';
+                        const cells = Array.from(table.querySelectorAll('th, td')).map(c => c.textContent.trim());
+                        const fullText = (title + ' ' + cells.join(' ')).toLowerCase();
+
+                        chatbotIndex.push({
+                            type: 'table',
+                            title: title,
+                            badge: '',
+                            tags: [],
+                            summary: cells.slice(0, 10).join(' | ').substring(0, 300),
+                            fullText: fullText,
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: '',
+                            element: wrapper || table
+                        });
+                    });
+                });
+            }
+
+            const synonyms = {
+                'pricing': ['cost', 'price', 'fee', 'rate', 'expense', 'money'],
+                'cost': ['pricing', 'price', 'fee', 'expense'],
+                'scam': ['predatory', 'fraud', 'avoid', 'blacklist', 'dubious', 'fake'],
+                'avoid': ['scam', 'predatory', 'blacklist', 'dangerous', 'risk'],
+                'good': ['trustworthy', 'trust', 'safe', 'reliable', 'legitimate'],
+                'safe': ['trustworthy', 'trust', 'reliable'],
+                'best': ['trustworthy', 'recommended', 'trust', 'top'],
+                'contract': ['deal', 'agreement', 'terms', 'legal'],
+                'rights': ['license', 'licensing', 'contract', 'reversion'],
+                'money': ['revenue', 'royalty', 'payment', 'profit', 'earnings'],
+                'pay': ['payment', 'royalty', 'revenue', 'earnings'],
+                'distributor': ['distribution', 'company', 'label'],
+                'streaming': ['svod', 'avod', 'platform', 'tubi', 'shudder'],
+                'physical': ['blu-ray', 'dvd', 'disc', 'media', 'vinyl'],
+                'festival': ['festivals', 'fest', 'premiere'],
+                'marketing': ['pr', 'publicity', 'promote', 'promotion'],
+                'horror': ['genre', 'indie', 'independent'],
+                'budget': ['micro-budget', 'low-budget', 'financing', 'cost'],
+                'tax': ['credit', 'incentive', 'rebate', 'georgia', 'maryland'],
+                'lawyer': ['attorney', 'legal', 'counsel'],
+                'cama': ['collection', 'account', 'management'],
+                'dcp': ['theatrical', 'cinema', 'screening', 'four-wall']
+            };
+
+            const stopWords = new Set(['what', 'which', 'who', 'how', 'does', 'do', 'is', 'are',
+                'the', 'a', 'an', 'in', 'on', 'for', 'to', 'of', 'and', 'or', 'but',
+                'should', 'i', 'my', 'can', 'about', "what's", "how's", 'whats', 'hows',
+                'tell', 'me', 'explain', 'describe', 'know', 'need', 'want', 'would',
+                'could', 'with', 'from', 'this', 'that', 'these', 'those', 'it', 'its',
+                'be', 'been', 'being', 'have', 'has', 'had', 'was', 'were', 'will',
+                'there', 'their', 'they', 'them', 'any', 'some', 'all', 'if', 'so']);
+
+            function processQuery(rawQuery) {
+                const query = rawQuery.toLowerCase().trim();
+                const tokens = query.split(/\s+/).filter(t => !stopWords.has(t) && t.length > 1);
+                const expandedTokens = [...tokens];
+                for (const token of tokens) {
+                    if (synonyms[token]) {
+                        expandedTokens.push(...synonyms[token]);
+                    }
+                }
+                return { tokens, expandedTokens, original: query };
+            }
+
+            function scoreChunk(chunk, queryTokens, originalQuery) {
+                let score = 0;
+                const titleLower = chunk.title.toLowerCase();
+
+                for (const token of queryTokens) {
+                    if (titleLower.includes(token)) score += 10;
+                    if (titleLower === token) score += 20;
+                }
+
+                const badgeLower = (chunk.badge || '').toLowerCase();
+                const tagsLower = chunk.tags.map(t => t.toLowerCase()).join(' ');
+                for (const token of queryTokens) {
+                    if (badgeLower.includes(token)) score += 8;
+                    if (tagsLower.includes(token)) score += 5;
+                }
+
+                const summaryLower = chunk.summary.toLowerCase();
+                for (const token of queryTokens) {
+                    if (summaryLower.includes(token)) score += 3;
+                }
+
+                for (const token of queryTokens) {
+                    const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(escaped, 'gi');
+                    const matches = chunk.fullText.match(regex);
+                    if (matches) score += Math.min(matches.length, 5);
+                }
+
+                if (originalQuery.length > 5 && chunk.fullText.includes(originalQuery)) {
+                    score += 15;
+                }
+
+                for (const token of queryTokens) {
+                    if (chunk.sectionId.includes(token) || chunk.sectionName.toLowerCase().includes(token)) {
+                        score += 5;
+                    }
+                }
+
+                return score;
+            }
+
+            function chatbotSearch(rawQuery) {
+                const { tokens, expandedTokens, original } = processQuery(rawQuery);
+                if (tokens.length === 0) return [];
+
+                return chatbotIndex
+                    .map(chunk => ({ chunk, score: scoreChunk(chunk, expandedTokens, original) }))
+                    .filter(r => r.score > 0)
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 5);
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function formatChunkAsMessage(chunk) {
+                let html = '<div class="chatbot-result">';
+                html += '<div class="chatbot-result-header">';
+                html += '<strong class="chatbot-result-title">' + escapeHtml(chunk.title) + '</strong>';
+                if (chunk.badge) {
+                    html += ' <span class="chatbot-result-badge">' + escapeHtml(chunk.badge) + '</span>';
+                }
+                html += '</div>';
+
+                const summary = chunk.summary.length > 200 ? chunk.summary.substring(0, 200).trim() + '...' : chunk.summary;
+                html += '<p class="chatbot-result-summary">' + escapeHtml(summary) + '</p>';
+
+                if (chunk.tags.length > 0) {
+                    html += '<div class="chatbot-result-tags">';
+                    chunk.tags.slice(0, 3).forEach(tag => {
+                        html += '<span class="chatbot-result-tag">' + escapeHtml(tag) + '</span>';
+                    });
+                    html += '</div>';
+                }
+
+                html += '<a href="#" class="chatbot-result-link" data-section="' + chunk.sectionId + '"';
+                if (chunk.elementId) html += ' data-element="' + chunk.elementId + '"';
+                html += '>View in guide &rarr;</a>';
+                html += '</div>';
+                return html;
+            }
+
+            function formatResponse(results, rawQuery) {
+                if (results.length === 0) return formatNoResults(rawQuery);
+
+                const query = rawQuery.toLowerCase();
+                let response = '';
+
+                if (/avoid|scam|predatory|bad|worst|dangerous|red.?flag|blacklist|fake/.test(query)) {
+                    response = '<p>Here\'s what I found about things to watch out for:</p>';
+                } else if (/best|good|safe|trustworthy|recommend|reliable|should.?i.?use/.test(query)) {
+                    response = '<p>Based on the guide\'s research, here are some options:</p>';
+                } else if (/how.?does|how.?do|how.?to|what.?is|what\'?s|explain|tell.?me/.test(query)) {
+                    response = '<p>Here\'s what the guide covers on that topic:</p>';
+                } else if (/pric|cost|fee|how.?much|expense|pay|money/.test(query)) {
+                    response = '<p>Here\'s the pricing and cost information I found:</p>';
+                } else {
+                    response = '<p>I found ' + results.length + ' relevant result' + (results.length > 1 ? 's' : '') + ':</p>';
+                }
+
+                for (const { chunk } of results) {
+                    response += formatChunkAsMessage(chunk);
+                }
+
+                return response;
+            }
+
+            function formatNoResults(rawQuery) {
+                let html = '<p>I couldn\'t find anything matching "<strong>' + escapeHtml(rawQuery) + '</strong>".</p>';
+                html += '<p style="margin-top: 8px;">Try one of these:</p>';
+                html += '<ul class="chatbot-suggestions">';
+                html += '<li>Search for a specific name (e.g., "Gravitas" or "Filmhub")</li>';
+                html += '<li>Ask about a topic like "CAMA", "red flags", or "festivals"</li>';
+                html += '<li>Try broader terms: "avoid", "trustworthy", "pricing"</li>';
+                html += '</ul>';
+                html += '<div class="chatbot-quick-searches">';
+                ['Trustworthy distributors', 'Distributors to avoid', 'How does CAMA work', 'Festival scams', 'Self-distribution'].forEach(q => {
+                    html += '<button class="chatbot-quick-btn" data-query="' + q + '">' + q + '</button>';
+                });
+                html += '</div>';
+                return html;
+            }
+
+            // DOM references
+            const chatbotBubble = document.getElementById('chatbotBubble');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+
+            if (chatbotBubble && chatbotWindow) {
+                // Build index on load
+                buildChatbotIndex();
+
+                function appendMessage(type, html) {
+                    const msg = document.createElement('div');
+                    msg.className = 'chatbot-msg ' + type;
+                    msg.innerHTML = html;
+                    chatbotMessages.appendChild(msg);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+
+                function showTypingIndicator() {
+                    const typing = document.createElement('div');
+                    typing.className = 'chatbot-typing';
+                    typing.id = 'chatbotTyping';
+                    typing.innerHTML = '<span></span><span></span><span></span>';
+                    chatbotMessages.appendChild(typing);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+
+                function removeTypingIndicator() {
+                    const typing = document.getElementById('chatbotTyping');
+                    if (typing) typing.remove();
+                }
+
+                function handleChatSubmit(query) {
+                    if (!query.trim()) return;
+                    const safeQuery = query.substring(0, 200);
+                    appendMessage('user', escapeHtml(safeQuery));
+                    showTypingIndicator();
+
+                    setTimeout(function() {
+                        removeTypingIndicator();
+                        const results = chatbotSearch(safeQuery);
+                        const responseHtml = formatResponse(results, safeQuery);
+                        appendMessage('bot', responseHtml);
+                    }, 300 + Math.random() * 200);
+                }
+
+                function navigateToResult(sectionId, elementId) {
+                    chatbotWindow.classList.remove('open');
+                    showSection(sectionId);
+                    window.location.hash = sectionId;
+
+                    if (elementId) {
+                        const target = document.getElementById(elementId);
+                        if (target) {
+                            setTimeout(function() {
+                                if (target.classList.contains('expandable') && !target.classList.contains('expanded')) {
+                                    target.classList.add('expanded');
+                                    target.setAttribute('aria-expanded', 'true');
+                                }
+                                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                target.style.boxShadow = '0 0 0 2px var(--accent)';
+                                setTimeout(function() { target.style.boxShadow = ''; }, 2000);
+                            }, 150);
+                        }
+                    } else {
+                        window.scrollTo(0, 0);
+                    }
+                }
+
+                // Event listeners
+                chatbotBubble.addEventListener('click', function() {
+                    chatbotWindow.classList.toggle('open');
+                    if (chatbotWindow.classList.contains('open')) {
+                        chatbotInput.focus();
+                    }
+                });
+
+                chatbotClose.addEventListener('click', function() {
+                    chatbotWindow.classList.remove('open');
+                });
+
+                chatbotInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && chatbotInput.value.trim()) {
+                        handleChatSubmit(chatbotInput.value.trim());
+                        chatbotInput.value = '';
+                    }
+                });
+
+                chatbotSend.addEventListener('click', function() {
+                    if (chatbotInput.value.trim()) {
+                        handleChatSubmit(chatbotInput.value.trim());
+                        chatbotInput.value = '';
+                    }
+                });
+
+                chatbotMessages.addEventListener('click', function(e) {
+                    const quickBtn = e.target.closest('.chatbot-quick-btn');
+                    if (quickBtn) {
+                        handleChatSubmit(quickBtn.dataset.query);
+                    }
+
+                    const resultLink = e.target.closest('.chatbot-result-link');
+                    if (resultLink) {
+                        e.preventDefault();
+                        navigateToResult(resultLink.dataset.section, resultLink.dataset.element);
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && chatbotWindow.classList.contains('open')) {
+                        chatbotWindow.classList.remove('open');
+                    }
+                });
             }
         })();
     </script>
