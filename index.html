@@ -1232,6 +1232,343 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 28px;
+            right: 148px;
+            z-index: 95;
+        }
+
+        .chatbot-bubble {
+            width: 52px;
+            height: 52px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chatbot-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.4);
+        }
+
+        .chatbot-bubble svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 92px;
+            right: 28px;
+            width: 400px;
+            max-height: 520px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-window.open {
+            display: flex;
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: var(--bg);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .chatbot-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+        }
+
+        .chatbot-close:hover {
+            color: var(--accent);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 380px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .chatbot-msg {
+            max-width: 88%;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chatbot-msg.user {
+            align-self: flex-end;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .chatbot-msg.bot {
+            align-self: flex-start;
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+        }
+
+        .chatbot-msg.bot p {
+            margin: 0 0 6px 0;
+        }
+
+        .chatbot-msg.bot ul {
+            margin: 4px 0 8px 0;
+            padding-left: 18px;
+        }
+
+        .chatbot-msg.bot li {
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+            gap: 8px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-input:focus {
+            border-color: var(--accent);
+        }
+
+        .chatbot-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chatbot-send {
+            padding: 8px 14px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .chatbot-send:hover {
+            background: var(--accent-hover);
+        }
+
+        .chatbot-send svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .chatbot-result {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: var(--surface);
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-result:hover {
+            border-color: var(--accent);
+        }
+
+        .chatbot-result-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .chatbot-result-title {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .chatbot-result-badge {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: var(--accent);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .chatbot-result-summary {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 0 0 6px 0;
+            line-height: 1.4;
+        }
+
+        .chatbot-result-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .chatbot-result-tag {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: var(--bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .chatbot-result-link {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .chatbot-result-link:hover {
+            text-decoration: underline;
+        }
+
+        .chatbot-typing {
+            display: flex;
+            gap: 4px;
+            padding: 10px 14px;
+            align-self: flex-start;
+        }
+
+        .chatbot-typing span {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: chatbotBounce 1.2s infinite;
+        }
+
+        .chatbot-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chatbot-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes chatbotBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+
+        .chatbot-quick-searches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .chatbot-quick-btn {
+            padding: 5px 10px;
+            font-size: 0.72rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .chatbot-quick-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .chatbot-suggestions {
+            padding-left: 18px;
+            margin: 6px 0;
+        }
+
+        .chatbot-suggestions li {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .chatbot-container {
+                bottom: 20px;
+                right: 132px;
+            }
+            .chatbot-bubble {
+                width: 44px;
+                height: 44px;
+            }
+            .chatbot-bubble svg {
+                width: 20px;
+                height: 20px;
+            }
+            .chatbot-window {
+                right: 8px;
+                left: 8px;
+                width: auto;
+                bottom: 76px;
+                max-height: 65vh;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .chatbot-window {
+                bottom: 0;
+                right: 0;
+                left: 0;
+                max-height: 70vh;
+            }
+        }
+
+        @media print {
+            .chatbot-container { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -10727,6 +11064,38 @@
         </footer>
     </main>
 
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <button class="chatbot-bubble" id="chatbotBubble" aria-label="Open search assistant" title="Ask the guide">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span class="chatbot-title">Distribution Guide Assistant</span>
+                <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-msg bot">
+                    <p>I can help you find information from this distribution guide. Try asking:</p>
+                    <div class="chatbot-quick-searches">
+                        <button class="chatbot-quick-btn" data-query="which distributors should I avoid">Distributors to avoid</button>
+                        <button class="chatbot-quick-btn" data-query="how does CAMA work">How does CAMA work?</button>
+                        <button class="chatbot-quick-btn" data-query="Filmhub pricing and fees">Filmhub pricing</button>
+                        <button class="chatbot-quick-btn" data-query="contract red flags">Contract red flags</button>
+                        <button class="chatbot-quick-btn" data-query="self distribution revenue">Self-distribution revenue</button>
+                        <button class="chatbot-quick-btn" data-query="predatory festival scams">Festival scams</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask about distributors, contracts, festivals..." autocomplete="off">
+                <button class="chatbot-send" id="chatbotSend" aria-label="Send">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navigation helper function
         function showSection(sectionId) {
@@ -11016,6 +11385,399 @@
                         el.classList.add('stagger-reveal');
                     });
                 }
+            }
+        })();
+
+        // ==========================================
+        // CHATBOT - Smart Search Assistant
+        // ==========================================
+
+        (function() {
+            const chatbotIndex = [];
+
+            function buildChatbotIndex() {
+                document.querySelectorAll('.section').forEach(section => {
+                    const sectionId = section.id;
+                    const sectionH2 = section.querySelector('.section-header h2');
+                    const sectionName = sectionH2 ? sectionH2.textContent.trim() : sectionId;
+                    const sectionDesc = section.querySelector('.section-header p');
+
+                    // Index section header
+                    if (sectionH2) {
+                        chatbotIndex.push({
+                            type: 'section-header',
+                            title: sectionName,
+                            badge: '',
+                            tags: [],
+                            summary: sectionDesc ? sectionDesc.textContent.trim().substring(0, 300) : '',
+                            fullText: (sectionName + ' ' + (sectionDesc ? sectionDesc.textContent : '')).toLowerCase(),
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: sectionId,
+                            element: section
+                        });
+                    }
+
+                    // Index cards
+                    section.querySelectorAll('.card').forEach(card => {
+                        const h3 = card.querySelector('.card-header h3, h3');
+                        const badge = card.querySelector('.card-badge');
+                        const content = card.querySelector('.card-content');
+                        const expand = card.querySelector('.expand-content');
+                        const metaTags = card.querySelectorAll('.meta-tag');
+
+                        const title = h3 ? h3.textContent.trim() : '';
+                        const badgeText = badge ? badge.textContent.trim() : '';
+                        const tags = Array.from(metaTags).map(t => t.textContent.trim());
+                        const summary = content ? content.textContent.trim().substring(0, 300) : '';
+                        const expandText = expand ? expand.textContent.trim() : '';
+                        const fullText = [title, badgeText, tags.join(' '), summary, expandText].join(' ').toLowerCase();
+
+                        chatbotIndex.push({
+                            type: 'card',
+                            title: title,
+                            badge: badgeText,
+                            tags: tags,
+                            summary: summary,
+                            fullText: fullText,
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: card.id || '',
+                            element: card
+                        });
+                    });
+
+                    // Index info boxes
+                    section.querySelectorAll('.info-box, .critical-alert').forEach(box => {
+                        const h4 = box.querySelector('h4');
+                        const texts = Array.from(box.querySelectorAll('p, li')).map(el => el.textContent.trim());
+                        const title = h4 ? h4.textContent.trim() : '';
+                        const bodyText = texts.join(' ');
+
+                        chatbotIndex.push({
+                            type: 'info-box',
+                            title: title,
+                            badge: box.classList.contains('danger') ? 'WARNING' : box.classList.contains('success') ? 'TIP' : '',
+                            tags: [],
+                            summary: bodyText.substring(0, 300),
+                            fullText: (title + ' ' + bodyText).toLowerCase(),
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: box.id || '',
+                            element: box
+                        });
+                    });
+
+                    // Index tables
+                    section.querySelectorAll('.comparison-table').forEach(table => {
+                        const wrapper = table.closest('.table-wrapper');
+                        const prevH3 = wrapper ? wrapper.previousElementSibling : null;
+                        const title = (prevH3 && prevH3.tagName === 'H3') ? prevH3.textContent.trim() : sectionName + ' Table';
+                        const cells = Array.from(table.querySelectorAll('th, td')).map(c => c.textContent.trim());
+                        const fullText = (title + ' ' + cells.join(' ')).toLowerCase();
+
+                        chatbotIndex.push({
+                            type: 'table',
+                            title: title,
+                            badge: '',
+                            tags: [],
+                            summary: cells.slice(0, 10).join(' | ').substring(0, 300),
+                            fullText: fullText,
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            elementId: '',
+                            element: wrapper || table
+                        });
+                    });
+                });
+            }
+
+            const synonyms = {
+                'pricing': ['cost', 'price', 'fee', 'rate', 'expense', 'money'],
+                'cost': ['pricing', 'price', 'fee', 'expense'],
+                'scam': ['predatory', 'fraud', 'avoid', 'blacklist', 'dubious', 'fake'],
+                'avoid': ['scam', 'predatory', 'blacklist', 'dangerous', 'risk'],
+                'good': ['trustworthy', 'trust', 'safe', 'reliable', 'legitimate'],
+                'safe': ['trustworthy', 'trust', 'reliable'],
+                'best': ['trustworthy', 'recommended', 'trust', 'top'],
+                'contract': ['deal', 'agreement', 'terms', 'legal'],
+                'rights': ['license', 'licensing', 'contract', 'reversion'],
+                'money': ['revenue', 'royalty', 'payment', 'profit', 'earnings'],
+                'pay': ['payment', 'royalty', 'revenue', 'earnings'],
+                'distributor': ['distribution', 'company', 'label'],
+                'streaming': ['svod', 'avod', 'platform', 'tubi', 'shudder'],
+                'physical': ['blu-ray', 'dvd', 'disc', 'media', 'vinyl'],
+                'festival': ['festivals', 'fest', 'premiere'],
+                'marketing': ['pr', 'publicity', 'promote', 'promotion'],
+                'horror': ['genre', 'indie', 'independent'],
+                'budget': ['micro-budget', 'low-budget', 'financing', 'cost'],
+                'tax': ['credit', 'incentive', 'rebate', 'georgia', 'maryland'],
+                'lawyer': ['attorney', 'legal', 'counsel'],
+                'cama': ['collection', 'account', 'management'],
+                'dcp': ['theatrical', 'cinema', 'screening', 'four-wall']
+            };
+
+            const stopWords = new Set(['what', 'which', 'who', 'how', 'does', 'do', 'is', 'are',
+                'the', 'a', 'an', 'in', 'on', 'for', 'to', 'of', 'and', 'or', 'but',
+                'should', 'i', 'my', 'can', 'about', "what's", "how's", 'whats', 'hows',
+                'tell', 'me', 'explain', 'describe', 'know', 'need', 'want', 'would',
+                'could', 'with', 'from', 'this', 'that', 'these', 'those', 'it', 'its',
+                'be', 'been', 'being', 'have', 'has', 'had', 'was', 'were', 'will',
+                'there', 'their', 'they', 'them', 'any', 'some', 'all', 'if', 'so']);
+
+            function processQuery(rawQuery) {
+                const query = rawQuery.toLowerCase().trim();
+                const tokens = query.split(/\s+/).filter(t => !stopWords.has(t) && t.length > 1);
+                const expandedTokens = [...tokens];
+                for (const token of tokens) {
+                    if (synonyms[token]) {
+                        expandedTokens.push(...synonyms[token]);
+                    }
+                }
+                return { tokens, expandedTokens, original: query };
+            }
+
+            function scoreChunk(chunk, queryTokens, originalQuery) {
+                let score = 0;
+                const titleLower = chunk.title.toLowerCase();
+
+                for (const token of queryTokens) {
+                    if (titleLower.includes(token)) score += 10;
+                    if (titleLower === token) score += 20;
+                }
+
+                const badgeLower = (chunk.badge || '').toLowerCase();
+                const tagsLower = chunk.tags.map(t => t.toLowerCase()).join(' ');
+                for (const token of queryTokens) {
+                    if (badgeLower.includes(token)) score += 8;
+                    if (tagsLower.includes(token)) score += 5;
+                }
+
+                const summaryLower = chunk.summary.toLowerCase();
+                for (const token of queryTokens) {
+                    if (summaryLower.includes(token)) score += 3;
+                }
+
+                for (const token of queryTokens) {
+                    const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(escaped, 'gi');
+                    const matches = chunk.fullText.match(regex);
+                    if (matches) score += Math.min(matches.length, 5);
+                }
+
+                if (originalQuery.length > 5 && chunk.fullText.includes(originalQuery)) {
+                    score += 15;
+                }
+
+                for (const token of queryTokens) {
+                    if (chunk.sectionId.includes(token) || chunk.sectionName.toLowerCase().includes(token)) {
+                        score += 5;
+                    }
+                }
+
+                return score;
+            }
+
+            function chatbotSearch(rawQuery) {
+                const { tokens, expandedTokens, original } = processQuery(rawQuery);
+                if (tokens.length === 0) return [];
+
+                return chatbotIndex
+                    .map(chunk => ({ chunk, score: scoreChunk(chunk, expandedTokens, original) }))
+                    .filter(r => r.score > 0)
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 5);
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function formatChunkAsMessage(chunk) {
+                let html = '<div class="chatbot-result">';
+                html += '<div class="chatbot-result-header">';
+                html += '<strong class="chatbot-result-title">' + escapeHtml(chunk.title) + '</strong>';
+                if (chunk.badge) {
+                    html += ' <span class="chatbot-result-badge">' + escapeHtml(chunk.badge) + '</span>';
+                }
+                html += '</div>';
+
+                const summary = chunk.summary.length > 200 ? chunk.summary.substring(0, 200).trim() + '...' : chunk.summary;
+                html += '<p class="chatbot-result-summary">' + escapeHtml(summary) + '</p>';
+
+                if (chunk.tags.length > 0) {
+                    html += '<div class="chatbot-result-tags">';
+                    chunk.tags.slice(0, 3).forEach(tag => {
+                        html += '<span class="chatbot-result-tag">' + escapeHtml(tag) + '</span>';
+                    });
+                    html += '</div>';
+                }
+
+                html += '<a href="#" class="chatbot-result-link" data-section="' + chunk.sectionId + '"';
+                if (chunk.elementId) html += ' data-element="' + chunk.elementId + '"';
+                html += '>View in guide &rarr;</a>';
+                html += '</div>';
+                return html;
+            }
+
+            function formatResponse(results, rawQuery) {
+                if (results.length === 0) return formatNoResults(rawQuery);
+
+                const query = rawQuery.toLowerCase();
+                let response = '';
+
+                if (/avoid|scam|predatory|bad|worst|dangerous|red.?flag|blacklist|fake/.test(query)) {
+                    response = '<p>Here\'s what I found about things to watch out for:</p>';
+                } else if (/best|good|safe|trustworthy|recommend|reliable|should.?i.?use/.test(query)) {
+                    response = '<p>Based on the guide\'s research, here are some options:</p>';
+                } else if (/how.?does|how.?do|how.?to|what.?is|what\'?s|explain|tell.?me/.test(query)) {
+                    response = '<p>Here\'s what the guide covers on that topic:</p>';
+                } else if (/pric|cost|fee|how.?much|expense|pay|money/.test(query)) {
+                    response = '<p>Here\'s the pricing and cost information I found:</p>';
+                } else {
+                    response = '<p>I found ' + results.length + ' relevant result' + (results.length > 1 ? 's' : '') + ':</p>';
+                }
+
+                for (const { chunk } of results) {
+                    response += formatChunkAsMessage(chunk);
+                }
+
+                return response;
+            }
+
+            function formatNoResults(rawQuery) {
+                let html = '<p>I couldn\'t find anything matching "<strong>' + escapeHtml(rawQuery) + '</strong>".</p>';
+                html += '<p style="margin-top: 8px;">Try one of these:</p>';
+                html += '<ul class="chatbot-suggestions">';
+                html += '<li>Search for a specific name (e.g., "Gravitas" or "Filmhub")</li>';
+                html += '<li>Ask about a topic like "CAMA", "red flags", or "festivals"</li>';
+                html += '<li>Try broader terms: "avoid", "trustworthy", "pricing"</li>';
+                html += '</ul>';
+                html += '<div class="chatbot-quick-searches">';
+                ['Trustworthy distributors', 'Distributors to avoid', 'How does CAMA work', 'Festival scams', 'Self-distribution'].forEach(q => {
+                    html += '<button class="chatbot-quick-btn" data-query="' + q + '">' + q + '</button>';
+                });
+                html += '</div>';
+                return html;
+            }
+
+            // DOM references
+            const chatbotBubble = document.getElementById('chatbotBubble');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+
+            if (chatbotBubble && chatbotWindow) {
+                // Build index on load
+                buildChatbotIndex();
+
+                function appendMessage(type, html) {
+                    const msg = document.createElement('div');
+                    msg.className = 'chatbot-msg ' + type;
+                    msg.innerHTML = html;
+                    chatbotMessages.appendChild(msg);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+
+                function showTypingIndicator() {
+                    const typing = document.createElement('div');
+                    typing.className = 'chatbot-typing';
+                    typing.id = 'chatbotTyping';
+                    typing.innerHTML = '<span></span><span></span><span></span>';
+                    chatbotMessages.appendChild(typing);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+
+                function removeTypingIndicator() {
+                    const typing = document.getElementById('chatbotTyping');
+                    if (typing) typing.remove();
+                }
+
+                function handleChatSubmit(query) {
+                    if (!query.trim()) return;
+                    const safeQuery = query.substring(0, 200);
+                    appendMessage('user', escapeHtml(safeQuery));
+                    showTypingIndicator();
+
+                    setTimeout(function() {
+                        removeTypingIndicator();
+                        const results = chatbotSearch(safeQuery);
+                        const responseHtml = formatResponse(results, safeQuery);
+                        appendMessage('bot', responseHtml);
+                    }, 300 + Math.random() * 200);
+                }
+
+                function navigateToResult(sectionId, elementId) {
+                    chatbotWindow.classList.remove('open');
+                    showSection(sectionId);
+                    window.location.hash = sectionId;
+
+                    if (elementId) {
+                        const target = document.getElementById(elementId);
+                        if (target) {
+                            setTimeout(function() {
+                                if (target.classList.contains('expandable') && !target.classList.contains('expanded')) {
+                                    target.classList.add('expanded');
+                                    target.setAttribute('aria-expanded', 'true');
+                                }
+                                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                target.style.boxShadow = '0 0 0 2px var(--accent)';
+                                setTimeout(function() { target.style.boxShadow = ''; }, 2000);
+                            }, 150);
+                        }
+                    } else {
+                        window.scrollTo(0, 0);
+                    }
+                }
+
+                // Event listeners
+                chatbotBubble.addEventListener('click', function() {
+                    chatbotWindow.classList.toggle('open');
+                    if (chatbotWindow.classList.contains('open')) {
+                        chatbotInput.focus();
+                    }
+                });
+
+                chatbotClose.addEventListener('click', function() {
+                    chatbotWindow.classList.remove('open');
+                });
+
+                chatbotInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && chatbotInput.value.trim()) {
+                        handleChatSubmit(chatbotInput.value.trim());
+                        chatbotInput.value = '';
+                    }
+                });
+
+                chatbotSend.addEventListener('click', function() {
+                    if (chatbotInput.value.trim()) {
+                        handleChatSubmit(chatbotInput.value.trim());
+                        chatbotInput.value = '';
+                    }
+                });
+
+                chatbotMessages.addEventListener('click', function(e) {
+                    const quickBtn = e.target.closest('.chatbot-quick-btn');
+                    if (quickBtn) {
+                        handleChatSubmit(quickBtn.dataset.query);
+                    }
+
+                    const resultLink = e.target.closest('.chatbot-result-link');
+                    if (resultLink) {
+                        e.preventDefault();
+                        navigateToResult(resultLink.dataset.section, resultLink.dataset.element);
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && chatbotWindow.classList.contains('open')) {
+                        chatbotWindow.classList.remove('open');
+                    }
+                });
             }
         })();
     </script>
